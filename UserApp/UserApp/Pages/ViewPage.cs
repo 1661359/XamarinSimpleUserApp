@@ -6,7 +6,7 @@ namespace UserApp.Pages
 {
     public class ViewPage<T>: ContentPage where T:IViewModel
     {
-        protected readonly T viewModel;
+        private readonly T viewModel;
 
         public T ViewModel => viewModel;
 

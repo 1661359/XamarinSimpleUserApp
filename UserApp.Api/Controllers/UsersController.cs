@@ -11,15 +11,16 @@ namespace UserApp.Api.Controllers
 
         [HttpPost]
         [ActionName("Login")]
-        public UserAuthorizationViewModel Login([FromBody]string userName)
+        public UserAuthorizationViewModel Login([FromBody]UserAuthorizationViewModel userAuthorizationViewModel)
         {
             const string baseUserName = "raiden";
             var result = new UserAuthorizationViewModel
             {
-                UserName = userName,
+                UserName = userAuthorizationViewModel.UserName,
                 Token = Guid.NewGuid().ToString(),
                 AuthorizationAnswer =
-                    userName == baseUserName ? AuthorizationAnswer.Ok : AuthorizationAnswer.WrongUserName
+                    userAuthorizationViewModel.
+                    UserName == baseUserName ? AuthorizationAnswer.Ok : AuthorizationAnswer.WrongUserName
             };
             return result;
         }

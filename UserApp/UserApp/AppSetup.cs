@@ -17,6 +17,7 @@ namespace UserApp
         protected virtual void RegisterDependencies(ContainerBuilder builder)
         {
             builder.RegisterType<LoginViewModel>().SingleInstance();
+            builder.RegisterType<MainPageViewModel>().SingleInstance();
             builder.RegisterInstance<IApiProvider>(new ApiProvider());
             builder.RegisterInstance(new AppSessionConfig());
         }

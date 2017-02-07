@@ -1,19 +1,19 @@
-﻿using System;
-using Xamarin.Forms;
+﻿using UserApp.ViewModel;
 
 namespace UserApp.Pages
 {
-    public partial class MainPage : ContentPage
+    public class MainPageBase : ViewPage<MainPageViewModel> { }
+
+    public partial class MainPage : MainPageBase
     {
         public MainPage()
         {
-            InitializeComponent();
-            
+            InitializeComponent();          
         }
 
-        private async void LogOutButtonClick(object sender, EventArgs e)
+        protected override void OnAppearing()
         {
-            await Navigation.PopToRootAsync(false);
+            ViewModel.LoadUserNameCommand.Execute(ViewModel);
         }
     }
 }

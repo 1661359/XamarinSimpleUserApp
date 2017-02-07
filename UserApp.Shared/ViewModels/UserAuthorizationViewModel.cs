@@ -4,6 +4,7 @@ namespace UserApp.Shared.ViewModels
 {
     public class UserAuthorizationViewModel
     {
+
         public string UserName
         {
             get;

@@ -9,6 +9,6 @@
     <StackLayout>
         <Label Text="Enter user name: " />
         <Entry Placeholder="User" Text="{Binding UserName}" />
-        <Button Clicked="LogInButtonClicked" Text="Log in" />
+        <Button Command="{Binding DoLoginCommand}" Text="Log in" />
     </StackLayout>
 </local:LoginPageBase>

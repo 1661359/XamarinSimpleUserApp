@@ -20,12 +20,12 @@ namespace UserApp.Services.ApiWrapper
         public async Task<T> MakeRequest<T>(Func<CancellationToken, Task<T>> loadingFunction, CancellationToken cancellationToken)
         {
             Exception exception = null;
-            var result = default(T);
+            T result = default(T);
 
             try
             {
                 result = await Policy.Handle<WebException>().Or<HttpRequestException>()
-                    .WaitAndRetryAsync(3, i => TimeSpan.FromMilliseconds(300), (ex, span) => exception = ex)
+                    .WaitAndRetryAsync(3, i => TimeSpan.FromMilliseconds(500), (ex, span) => exception = ex)
                     .ExecuteAsync(loadingFunction, cancellationToken);
             }
             catch (Exception e)

@@ -2,8 +2,10 @@
     using System.Threading.Tasks;
     using System.Windows.Input;
     using PropertyChanged;
+    using UserApp.Pages;
     using UserApp.Services;
     using UserApp.Services.ApiWrapper;
+    using UserApp.Shared.ViewModels;
     using Xamarin.Forms;
 
 namespace UserApp.ViewModel
@@ -25,12 +27,6 @@ namespace UserApp.ViewModel
             set;
         }
 
-        public bool IsLoggedIn
-        {
-            get;
-            private set;
-        }
-
         public LoginViewModel(IApiProvider apiProvider, AppSessionConfig appSessionConfig)
         {
             DoLoginCommand = new Command(async () => await DoLogin() );
@@ -41,9 +37,17 @@ namespace UserApp.ViewModel
         private async Task DoLogin()
         {
             var cancelationToken = new CancellationTokenSource();
-            var authViewModel = await apiProvider.MakeRequest(ct => apiProvider.UsersApi.Login(UserName, ct), cancelationToken.Token);
+            var authViewModel = await apiProvider.MakeRequest(ct => apiProvider.UsersApi.Login(new UserAuthorizationViewModel {UserName = UserName}, ct), cancelationToken.Token);
             appSessionConfig.LoadAuthorizationResult(authViewModel);
-            IsLoggedIn = appSessionConfig.IsLoggedIn;
+            await NavigateToMainPageWhenLoggedIn();
+        }
+
+        public async Task NavigateToMainPageWhenLoggedIn()
+        {
+            if (appSessionConfig.IsLoggedIn)
+            {
+                await Application.Current.MainPage.Navigation.PushAsync(new MainPage());
+            }
         }
     }
 }

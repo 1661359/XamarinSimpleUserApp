@@ -25,5 +25,10 @@ namespace UserApp.Services
             token = model.Token;
             IsLoggedIn = model.AuthorizationAnswer == AuthorizationAnswer.Ok;
         }
+
+        public void DoLogout()
+        {
+            IsLoggedIn = false;
+        }
     }
 }
