@@ -16,6 +16,8 @@ namespace UserApp.ViewModel
         private readonly IApiProvider apiProvider;
         private readonly AppSessionConfig appSessionConfig;
 
+        private bool canLogin = true;
+
         public ICommand DoLoginCommand
         {
             get;
@@ -29,17 +31,25 @@ namespace UserApp.ViewModel
 
         public LoginViewModel(IApiProvider apiProvider, AppSessionConfig appSessionConfig)
         {
-            DoLoginCommand = new Command(async () => await DoLogin() );
+            DoLoginCommand = new Command(async () => await DoLogin(),() => canLogin );
             this.apiProvider = apiProvider;
             this.appSessionConfig = appSessionConfig;
         }
 
         private async Task DoLogin()
         {
+            SetCanLoginState(false);
             var cancelationToken = new CancellationTokenSource();
             var authViewModel = await apiProvider.MakeRequest(ct => apiProvider.UsersApi.Login(new UserAuthorizationViewModel {UserName = UserName}, ct), cancelationToken.Token);
             appSessionConfig.LoadAuthorizationResult(authViewModel);
             await NavigateToMainPageWhenLoggedIn();
+            SetCanLoginState(true);
+        }
+
+        private void SetCanLoginState(bool state)
+        {
+            canLogin = state;
+            ((Command)DoLoginCommand).ChangeCanExecute();
         }
 
         public async Task NavigateToMainPageWhenLoggedIn()
