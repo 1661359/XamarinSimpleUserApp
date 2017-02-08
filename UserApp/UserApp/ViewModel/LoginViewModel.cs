@@ -1,21 +1,17 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using IronKit.Validation;
-using IronKit.Validation.Utils;
-using PropertyChanged;
-using UserApp.Pages;
-using UserApp.Services;
-using UserApp.Services.ApiWrapper;
-using UserApp.Shared.ViewModels;
-using Xamarin.Forms;
-
+﻿    using System.Threading;
+    using System.Threading.Tasks;
+    using System.Windows.Input;
+    using PropertyChanged;
+    using UserApp.Pages;
+    using UserApp.Services;
+    using UserApp.Services.ApiWrapper;
+    using UserApp.Shared.ViewModels;
+    using Xamarin.Forms;
 
 namespace UserApp.ViewModel
 {
     [ImplementPropertyChanged]
-    public class LoginViewModel : IViewModel, IValidatable<LoginViewModel>
+    public class LoginViewModel : IViewModel
     {
         private readonly IApiProvider apiProvider;
         private readonly AppSessionConfig appSessionConfig;
@@ -25,21 +21,16 @@ namespace UserApp.ViewModel
         public ICommand DoLoginCommand
         {
             get;
+            private set;
         }
-
-        [Required]
-        [MinLength(4)]
         public string UserName
         {
             get;
             set;
         }
 
-
         public LoginViewModel(IApiProvider apiProvider, AppSessionConfig appSessionConfig)
         {
-            ValidationInfo = new ValidationInfo<LoginViewModel>(this);
-            ValidationInfo.AddValidator(m => m.UserName.Length < 8, nameof(UserName));
             DoLoginCommand = new Command(async () => await DoLogin(),() => canLogin );
             this.apiProvider = apiProvider;
             this.appSessionConfig = appSessionConfig;
@@ -47,8 +38,6 @@ namespace UserApp.ViewModel
 
         private async Task DoLogin()
         {
-            if (!this.IsValid())
-                return;
             SetCanLoginState(false);
             var cancelationToken = new CancellationTokenSource();
             var authViewModel = await apiProvider.MakeRequest(ct => apiProvider.UsersApi.Login(new UserAuthorizationViewModel {UserName = UserName}, ct), cancelationToken.Token);
@@ -70,7 +59,5 @@ namespace UserApp.ViewModel
                 await Application.Current.MainPage.Navigation.PushAsync(new MainPage());
             }
         }
-
-        public ValidationInfo<LoginViewModel> ValidationInfo { get; }
     }
 }
