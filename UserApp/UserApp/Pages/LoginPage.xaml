@@ -4,8 +4,9 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:UserApp.Pages;assembly=UserApp"
+    xmlns:userApp="clr-namespace:UserApp;assembly=UserApp"
     xmlns:validation="clr-namespace:IronKit.Validation;assembly=IronKit.Validation"
-    Title="User App"
+    Title="{x:Static userApp:AppResources.ApplicationName}"
     NavigationPage.HasBackButton="False">
     <local:LoginPage.Resources>
         <ResourceDictionary>
@@ -30,17 +31,18 @@
     </local:LoginPage.Resources>
 
     <StackLayout>
-        <Label Text="Enter user name: " />
+        <Label Text="{x:Static userApp:AppResources.UserNameLabel}" />
         <Entry
             x:Name="UserNameEntry"
             validation:Validation.ValidateOn="PropertyChange"
-            Placeholder="User"
+            Focused="UserNameEntry_OnFocused"
+            Placeholder="{x:Static userApp:AppResources.UserNamePlaceholder}"
             Style="{StaticResource ValidatableEntry}"
             Text="{Binding UserName}" />
         <Button
             x:Name="LoginButton"
             Command="{Binding DoLoginCommand}"
-            Text="Log in">
+            Text="{x:Static userApp:AppResources.LoginButtonCaption}">
             <Button.Triggers>
                 <DataTrigger
                     Binding="{Binding Source={x:Reference UserNameEntry}, Path=IsFocused, ConverterParameter={x:Reference UserNameEntry}, Converter={StaticResource ValidationConverter}}"
@@ -56,5 +58,9 @@
                 </DataTrigger>
             </Button.Triggers>
         </Button>
+        <Label
+            HorizontalTextAlignment="Center"
+            IsVisible="{Binding IsMessageVisible}"
+            Text="{Binding LoginMessage}" />
     </StackLayout>
 </local:LoginPageBase>

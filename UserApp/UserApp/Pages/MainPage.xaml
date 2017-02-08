@@ -4,17 +4,18 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:UserApp.Pages;assembly=UserApp"
-    Title="Start Page"
-    NavigationPage.HasBackButton="False">
+    xmlns:userApp="clr-namespace:UserApp;assembly=UserApp"
+    NavigationPage.HasBackButton="False"
+    Title="{x:Static userApp:AppResources.ApplicationName}">
     <StackLayout>
         <Label
             HorizontalOptions="Center"
-            Text="Welcome!"
+            Text="{x:Static userApp:AppResources.Message_Welcome}"
             VerticalOptions="Center" />
         <Label
             HorizontalOptions="Center"
             Text="{Binding UserName}"
             VerticalOptions="Center" />
-        <Button Command="{Binding DoLogoutCommand}" Text="Log out" />
+        <Button Command="{Binding DoLogoutCommand}" Text="{x:Static userApp:AppResources.LogoutButtonCaption}" />
     </StackLayout>
 </local:MainPageBase>

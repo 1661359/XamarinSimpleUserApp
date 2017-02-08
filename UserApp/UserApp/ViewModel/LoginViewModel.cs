@@ -8,6 +8,7 @@ using PropertyChanged;
 using UserApp.Pages;
 using UserApp.Services;
 using UserApp.Services.ApiWrapper;
+using UserApp.Shared.Contracts;
 using UserApp.Shared.ViewModels;
 using Xamarin.Forms;
 
@@ -35,9 +36,22 @@ namespace UserApp.ViewModel
             set;
         }
 
+        public string LoginMessage
+        {
+            get;
+            set;
+        }
+
+        public bool IsMessageVisible
+        {
+            get;
+            set;
+        }
+
 
         public LoginViewModel(IApiProvider apiProvider, AppSessionConfig appSessionConfig)
         {
+            
             ValidationInfo = new ValidationInfo<LoginViewModel>(this);
             ValidationInfo.AddValidator(m => m.UserName.Length < 8, nameof(UserName));
             DoLoginCommand = new Command(async () => await DoLogin(),() => canLogin );
@@ -50,9 +64,15 @@ namespace UserApp.ViewModel
             if (!this.IsValid())
                 return;
             SetCanLoginState(false);
+            IsMessageVisible = false;
             var cancelationToken = new CancellationTokenSource();
             var authViewModel = await apiProvider.MakeRequest(ct => apiProvider.UsersApi.Login(new UserAuthorizationViewModel {UserName = UserName}, ct), cancelationToken.Token);
             appSessionConfig.LoadAuthorizationResult(authViewModel);
+            if (authViewModel.AuthorizationAnswer == AuthorizationAnswer.WrongUserName)
+            {
+                IsMessageVisible = true;
+                LoginMessage = AppResources.Message_WrongUserName;
+            }
             await NavigateToMainPageWhenLoggedIn();
             SetCanLoginState(true);
         }

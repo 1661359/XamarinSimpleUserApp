@@ -18,7 +18,11 @@ namespace UserApp.Pages
         {
             await ViewModel.NavigateToMainPageWhenLoggedIn();
         }
- 
+
+        private void UserNameEntry_OnFocused(object sender, FocusEventArgs e)
+        {
+            ViewModel.IsMessageVisible = false;
+        }
     }
 
     public class ValidationConverter : IValueConverter
