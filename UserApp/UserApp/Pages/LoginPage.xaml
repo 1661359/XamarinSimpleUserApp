@@ -4,11 +4,57 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:UserApp.Pages;assembly=UserApp"
+    xmlns:validation="clr-namespace:IronKit.Validation;assembly=IronKit.Validation"
     Title="User App"
     NavigationPage.HasBackButton="False">
+    <local:LoginPage.Resources>
+        <ResourceDictionary>
+            <local:ValidationConverter x:Key="ValidationConverter" />
+            <Style x:Key="ValidatableEntry" TargetType="Entry">
+                <Style.Triggers>
+                    <Trigger TargetType="Entry" Property="validation:Validation.ValidationState" Value="Invalid">
+                        <Setter Property="PlaceholderColor" Value="Red" />
+                        <Setter Property="TextColor" Value="Red" />
+                    </Trigger>
+                    <Trigger TargetType="Entry" Property="validation:Validation.ValidationState" Value="Unknown">
+                        <Setter Property="PlaceholderColor" Value="Blue" />
+                        <Setter Property="TextColor" Value="Blue" />
+                    </Trigger>
+                    <Trigger TargetType="Entry" Property="validation:Validation.ValidationState" Value="Valid">
+                        <Setter Property="PlaceholderColor" Value="Green" />
+                        <Setter Property="TextColor" Value="Green" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </ResourceDictionary>
+    </local:LoginPage.Resources>
+
     <StackLayout>
         <Label Text="Enter user name: " />
-        <Entry Placeholder="User" Text="{Binding UserName}" />
-        <Button Command="{Binding DoLoginCommand}" Text="Log in" />
+        <Entry
+            x:Name="UserNameEntry"
+            validation:Validation.ValidateOn="PropertyChange"
+            Placeholder="User"
+            Style="{StaticResource ValidatableEntry}"
+            Text="{Binding UserName}" />
+        <Button
+            x:Name="LoginButton"
+            Command="{Binding DoLoginCommand}"
+            Text="Log in">
+            <Button.Triggers>
+                <DataTrigger
+                    Binding="{Binding Source={x:Reference UserNameEntry}, Path=IsFocused, ConverterParameter={x:Reference UserNameEntry}, Converter={StaticResource ValidationConverter}}"
+                    TargetType="Button"
+                    Value="true">
+                    <Setter Property="IsEnabled" Value="true" />
+                </DataTrigger>
+                <DataTrigger
+                    Binding="{Binding Source={x:Reference UserNameEntry}, Path=IsFocused, ConverterParameter={x:Reference UserNameEntry}, Converter={StaticResource ValidationConverter}}"
+                    TargetType="Button"
+                    Value="false">
+                    <Setter Property="IsEnabled" Value="false" />
+                </DataTrigger>
+            </Button.Triggers>
+        </Button>
     </StackLayout>
 </local:LoginPageBase>
