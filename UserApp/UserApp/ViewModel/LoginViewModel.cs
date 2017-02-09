@@ -29,7 +29,7 @@ namespace UserApp.ViewModel
         }
 
         [Required]
-        [MinLength(4)]
+        [StringLength(8, MinimumLength = 4)]
         public string UserName
         {
             get;
@@ -53,7 +53,6 @@ namespace UserApp.ViewModel
         {
             
             ValidationInfo = new ValidationInfo<LoginViewModel>(this);
-            ValidationInfo.AddValidator(m => m.UserName.Length < 8, nameof(UserName));
             DoLoginCommand = new Command(async () => await DoLogin(),() => canLogin );
             this.apiProvider = apiProvider;
             this.appSessionConfig = appSessionConfig;

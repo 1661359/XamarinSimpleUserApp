@@ -27,6 +27,22 @@
                     </Trigger>
                 </Style.Triggers>
             </Style>
+            <Style x:Key="LoginButtonStyle" TargetType="Button">
+                <Style.Triggers>
+                    <DataTrigger
+                        Binding="{Binding Source={x:Reference UserNameEntry}, Path=IsFocused, ConverterParameter={x:Reference UserNameEntry}, Converter={StaticResource ValidationConverter}}"
+                        TargetType="Button"
+                        Value="true">
+                        <Setter Property="IsEnabled" Value="true" />
+                    </DataTrigger>
+                    <DataTrigger
+                        Binding="{Binding Source={x:Reference UserNameEntry}, Path=IsFocused, ConverterParameter={x:Reference UserNameEntry}, Converter={StaticResource ValidationConverter}}"
+                        TargetType="Button"
+                        Value="false">
+                        <Setter Property="IsEnabled" Value="false" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
         </ResourceDictionary>
     </local:LoginPage.Resources>
 
@@ -42,22 +58,8 @@
         <Button
             x:Name="LoginButton"
             Command="{Binding DoLoginCommand}"
-            Text="{x:Static userApp:AppResources.LoginButtonCaption}">
-            <Button.Triggers>
-                <DataTrigger
-                    Binding="{Binding Source={x:Reference UserNameEntry}, Path=IsFocused, ConverterParameter={x:Reference UserNameEntry}, Converter={StaticResource ValidationConverter}}"
-                    TargetType="Button"
-                    Value="true">
-                    <Setter Property="IsEnabled" Value="true" />
-                </DataTrigger>
-                <DataTrigger
-                    Binding="{Binding Source={x:Reference UserNameEntry}, Path=IsFocused, ConverterParameter={x:Reference UserNameEntry}, Converter={StaticResource ValidationConverter}}"
-                    TargetType="Button"
-                    Value="false">
-                    <Setter Property="IsEnabled" Value="false" />
-                </DataTrigger>
-            </Button.Triggers>
-        </Button>
+            Style="{StaticResource LoginButtonStyle}"
+            Text="{x:Static userApp:AppResources.LoginButtonCaption}" />
         <Label
             HorizontalTextAlignment="Center"
             IsVisible="{Binding IsMessageVisible}"

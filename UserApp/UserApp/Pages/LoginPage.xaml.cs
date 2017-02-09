@@ -12,6 +12,7 @@ namespace UserApp.Pages
         public LoginPage()
         {
             InitializeComponent();
+            LoginButton.IsEnabled = false;
         }
 
         protected override async void OnAppearing()
