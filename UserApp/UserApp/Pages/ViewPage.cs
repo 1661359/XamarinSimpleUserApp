@@ -12,7 +12,7 @@ namespace UserApp.Pages
 
         public ViewPage()
         {
-            using (var scope = AppContainer.Container.BeginLifetimeScope())
+            using (AppContainer.Container.BeginLifetimeScope())
             {
                 viewModel = AppContainer.Container.Resolve<T>();
             }

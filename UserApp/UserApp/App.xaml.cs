@@ -11,7 +11,7 @@ namespace UserApp
 
             AppContainer.Container = setup.CreateContainer();
 
-            MainPage = new NavigationPage(new LoginPage());
+            MainPage = new MainDetailedPage();
 
         }
 
@@ -25,14 +25,9 @@ namespace UserApp
             // Handle when your app sleeps
         }
 
-        protected override async void OnResume()
+        protected override void OnResume()
         {
             // Handle when your app resumes
-            if (!Current.Properties.ContainsKey("UserName"))
-            {
-                await MainPage.Navigation.PopToRootAsync(false);
-                await MainPage.Navigation.PushAsync(new LoginPage());
-            }
         }
     }
 }

@@ -10,7 +10,7 @@
     <StackLayout>
         <Label
             HorizontalOptions="Center"
-            Text="{x:Static userApp:AppResources.Message_Welcome}"
+            Text="{x:Static userApp:AppResources.WelcomeLabel}"
             VerticalOptions="Center" />
         <Label
             HorizontalOptions="Center"

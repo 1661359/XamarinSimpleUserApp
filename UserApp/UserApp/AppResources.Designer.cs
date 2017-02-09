@@ -89,16 +89,25 @@ namespace UserApp {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Welcome!.
+        ///   Looks up a localized string similar to Problem with connection.
         /// </summary>
-        internal static string Message_Welcome {
+        internal static string Message_ProblemWithConnection {
             get {
-                return ResourceManager.GetString("Message_Welcome", resourceCulture);
+                return ResourceManager.GetString("Message_ProblemWithConnection", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User Name Incorrect.
+        ///   Looks up a localized string similar to Please, wait.
+        /// </summary>
+        internal static string Message_WaitAnswer {
+            get {
+                return ResourceManager.GetString("Message_WaitAnswer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User name incorrect.
         /// </summary>
         internal static string Message_WrongUserName {
             get {
@@ -121,6 +130,15 @@ namespace UserApp {
         internal static string UserNamePlaceholder {
             get {
                 return ResourceManager.GetString("UserNamePlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Welcome!.
+        /// </summary>
+        internal static string WelcomeLabel {
+            get {
+                return ResourceManager.GetString("WelcomeLabel", resourceCulture);
             }
         }
     }

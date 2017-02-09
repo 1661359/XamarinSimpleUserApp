@@ -10,7 +10,6 @@
     NavigationPage.HasBackButton="False">
     <local:LoginPage.Resources>
         <ResourceDictionary>
-            <local:ValidationConverter x:Key="ValidationConverter" />
             <Style x:Key="ValidatableEntry" TargetType="Entry">
                 <Style.Triggers>
                     <Trigger TargetType="Entry" Property="validation:Validation.ValidationState" Value="Invalid">
@@ -27,25 +26,8 @@
                     </Trigger>
                 </Style.Triggers>
             </Style>
-            <Style x:Key="LoginButtonStyle" TargetType="Button">
-                <Style.Triggers>
-                    <DataTrigger
-                        Binding="{Binding Source={x:Reference UserNameEntry}, Path=Text.Length, ConverterParameter={x:Reference UserNameEntry}, Converter={StaticResource ValidationConverter}}"
-                        TargetType="Button"
-                        Value="true">
-                        <Setter Property="IsEnabled" Value="true" />
-                    </DataTrigger>
-                    <DataTrigger
-                        Binding="{Binding Source={x:Reference UserNameEntry}, Path=Text.Length, ConverterParameter={x:Reference UserNameEntry}, Converter={StaticResource ValidationConverter}}"
-                        TargetType="Button"
-                        Value="false">
-                        <Setter Property="IsEnabled" Value="false" />
-                    </DataTrigger>
-                </Style.Triggers>
-            </Style>
         </ResourceDictionary>
     </local:LoginPage.Resources>
-
     <StackLayout>
         <Label Text="{x:Static userApp:AppResources.UserNameLabel}" />
         <Entry
@@ -58,7 +40,7 @@
         <Button
             x:Name="LoginButton"
             Command="{Binding DoLoginCommand}"
-            Style="{StaticResource LoginButtonStyle}"
+            IsEnabled="{Binding IsLoginEnabled}"
             Text="{x:Static userApp:AppResources.LoginButtonCaption}" />
         <Label
             HorizontalTextAlignment="Center"

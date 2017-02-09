@@ -1,6 +1,6 @@
-﻿using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using PropertyChanged;
+using UserApp.Pages;
 using UserApp.Services;
 using Xamarin.Forms;
 
@@ -33,7 +33,7 @@ namespace UserApp.ViewModel
         {
             this.appSessionConfig = appSessionConfig;
             LoadUserNameCommand = new Command(LoadUserName);
-            DoLogoutCommand = new Command(async () => await DoLogout());
+            DoLogoutCommand = new Command(DoLogout);
         }
 
         private void LoadUserName()
@@ -41,10 +41,10 @@ namespace UserApp.ViewModel
             UserName = appSessionConfig.UserName;
         }
 
-        private async Task DoLogout()
+        private void DoLogout()
         {
-            appSessionConfig.DoLogout();
-            await Application.Current.MainPage.Navigation.PopToRootAsync(false);
+            appSessionConfig.DoLogout(); 
+            Application.Current.MainPage = new LoginPage();
         }
     }
 }

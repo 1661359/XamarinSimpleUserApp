@@ -126,16 +126,22 @@
   <data name="LogoutButtonCaption" xml:space="preserve">
     <value>Log out</value>
   </data>
-  <data name="Message_Welcome" xml:space="preserve">
-    <value>Welcome!</value>
+  <data name="Message_ProblemWithConnection" xml:space="preserve">
+    <value>Problem with connection</value>
+  </data>
+  <data name="Message_WaitAnswer" xml:space="preserve">
+    <value>Please, wait</value>
   </data>
   <data name="Message_WrongUserName" xml:space="preserve">
-    <value>User Name Incorrect</value>
+    <value>User name incorrect</value>
   </data>
   <data name="UserNameLabel" xml:space="preserve">
     <value>Enter user name:</value>
   </data>
   <data name="UserNamePlaceholder" xml:space="preserve">
     <value>User</value>
+  </data>
+  <data name="WelcomeLabel" xml:space="preserve">
+    <value>Welcome!</value>
   </data>
 </root>

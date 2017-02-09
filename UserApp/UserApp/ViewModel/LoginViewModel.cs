@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -11,7 +12,6 @@ using UserApp.Services.ApiWrapper;
 using UserApp.Shared.Contracts;
 using UserApp.Shared.ViewModels;
 using Xamarin.Forms;
-
 
 namespace UserApp.ViewModel
 {
@@ -51,43 +51,74 @@ namespace UserApp.ViewModel
 
         public LoginViewModel(IApiProvider apiProvider, AppSessionConfig appSessionConfig)
         {
-            
-            ValidationInfo = new ValidationInfo<LoginViewModel>(this);
-            DoLoginCommand = new Command(async () => await DoLogin(),() => canLogin );
             this.apiProvider = apiProvider;
             this.appSessionConfig = appSessionConfig;
+            ValidationInfo = new ValidationInfo<LoginViewModel>(this);
+            ValidationInfo.ValidationOccurred += ValidationOccurredEventHandler;
+            DoLoginCommand = new Command(async () => await DoLogin(),() => canLogin);
+            
+        }
+
+        private void ValidationOccurredEventHandler(object sender, ValidationOccurredEventArgs e)
+        {
+            var isUserNameValid = e.InvalidProperties.Any(x => x == nameof(UserName));
+            EnableDoLoginCommand(isUserNameValid);
         }
 
         private async Task DoLogin()
         {
             if (!this.IsValid())
                 return;
-            SetCanLoginState(false);
-            IsMessageVisible = false;
-            var cancelationToken = new CancellationTokenSource();
-            var authViewModel = await apiProvider.MakeRequest(ct => apiProvider.UsersApi.Login(new UserAuthorizationViewModel {UserName = UserName}, ct), cancelationToken.Token);
-            appSessionConfig.LoadAuthorizationResult(authViewModel);
-            if (authViewModel.AuthorizationAnswer == AuthorizationAnswer.WrongUserName)
+            EnableDoLoginCommand(false);
+            ShowMessage(AppResources.Message_WaitAnswer);
+            var authViewModel = await GetUserAuthorizationViewModel();
+            if (authViewModel != null)
             {
-                IsMessageVisible = true;
-                LoginMessage = AppResources.Message_WrongUserName;
+                appSessionConfig.LoadAuthorizationResult(authViewModel);
+                if (authViewModel.AuthorizationAnswer == AuthorizationAnswer.WrongUserName)
+                {
+                    ShowMessage(AppResources.Message_WrongUserName);
+                }
+                NavigateToMainPageWhenLoggedIn();
             }
-            await NavigateToMainPageWhenLoggedIn();
-            SetCanLoginState(true);
+            else
+            {
+                ShowMessage(AppResources.Message_ProblemWithConnection);
+            }
+            EnableDoLoginCommand(true);
         }
 
-        private void SetCanLoginState(bool state)
+        private async Task<UserAuthorizationViewModel> GetUserAuthorizationViewModel()
         {
-            canLogin = state;
-            ((Command)DoLoginCommand).ChangeCanExecute();
+            var cancelationToken = new CancellationTokenSource();
+            var authViewModel =
+                await
+                    apiProvider.MakeRequest(
+                        ct => apiProvider.UsersApi.Login(new UserAuthorizationViewModel {UserName = UserName}, ct),
+                        cancelationToken.Token);
+            return authViewModel;
         }
 
-        public async Task NavigateToMainPageWhenLoggedIn()
+        private void ShowMessage(string message)
+        {
+            IsMessageVisible = true;
+            LoginMessage = message;
+        }
+
+        public void NavigateToMainPageWhenLoggedIn()
         {
             if (appSessionConfig.IsLoggedIn)
             {
-                await Application.Current.MainPage.Navigation.PushAsync(new MainPage());
+                UserName = string.Empty;
+                IsMessageVisible = false;
+                Application.Current.MainPage = new MainDetailedPage();
             }
+        }
+
+        public void EnableDoLoginCommand(bool state)
+        {
+            canLogin = state;
+            ((Command)DoLoginCommand).ChangeCanExecute();
         }
 
         public ValidationInfo<LoginViewModel> ValidationInfo { get; }

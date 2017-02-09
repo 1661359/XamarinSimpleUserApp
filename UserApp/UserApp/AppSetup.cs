@@ -16,10 +16,16 @@ namespace UserApp
 
         protected virtual void RegisterDependencies(ContainerBuilder builder)
         {
-            builder.RegisterType<LoginViewModel>().SingleInstance();
-            builder.RegisterType<MainPageViewModel>().SingleInstance();
+            RegisterViewModels(builder);
             builder.RegisterInstance<IApiProvider>(new ApiProvider());
             builder.RegisterInstance(new AppSessionConfig());
+        }
+
+        private static void RegisterViewModels(ContainerBuilder builder)
+        {
+            builder.RegisterType<LoginViewModel>().SingleInstance();
+            builder.RegisterType<MainPageViewModel>().SingleInstance();
+            builder.RegisterType<MainDetailedPageViewModel>().SingleInstance();
         }
     }
 }
