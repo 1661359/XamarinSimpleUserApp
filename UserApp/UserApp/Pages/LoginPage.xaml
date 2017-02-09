@@ -30,13 +30,13 @@
             <Style x:Key="LoginButtonStyle" TargetType="Button">
                 <Style.Triggers>
                     <DataTrigger
-                        Binding="{Binding Source={x:Reference UserNameEntry}, Path=IsFocused, ConverterParameter={x:Reference UserNameEntry}, Converter={StaticResource ValidationConverter}}"
+                        Binding="{Binding Source={x:Reference UserNameEntry}, Path=Text.Length, ConverterParameter={x:Reference UserNameEntry}, Converter={StaticResource ValidationConverter}}"
                         TargetType="Button"
                         Value="true">
                         <Setter Property="IsEnabled" Value="true" />
                     </DataTrigger>
                     <DataTrigger
-                        Binding="{Binding Source={x:Reference UserNameEntry}, Path=IsFocused, ConverterParameter={x:Reference UserNameEntry}, Converter={StaticResource ValidationConverter}}"
+                        Binding="{Binding Source={x:Reference UserNameEntry}, Path=Text.Length, ConverterParameter={x:Reference UserNameEntry}, Converter={StaticResource ValidationConverter}}"
                         TargetType="Button"
                         Value="false">
                         <Setter Property="IsEnabled" Value="false" />
