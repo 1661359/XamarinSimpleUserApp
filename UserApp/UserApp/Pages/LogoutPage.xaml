@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<local:LogoutPageBase
+    x:Class="UserApp.Pages.LogoutPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:UserApp.Pages;assembly=UserApp"
+    xmlns:userApp="clr-namespace:UserApp;assembly=UserApp"
+    Title="{x:Static userApp:AppResources.ApplicationName}"
+    NavigationPage.HasBackButton="False">
+    <StackLayout>
+        <Label
+            HorizontalOptions="Center"
+            Text="{x:Static userApp:AppResources.WelcomeLabel}"
+            VerticalOptions="Center" />
+        <Label
+            HorizontalOptions="Center"
+            Text="{Binding UserName}"
+            VerticalOptions="Center" />
+        <Button Command="{Binding DoLogoutCommand}" Text="{x:Static userApp:AppResources.LogoutButtonCaption}" />
+    </StackLayout>
+</local:LogoutPageBase>

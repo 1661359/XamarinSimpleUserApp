@@ -1,18 +1,20 @@
 ﻿using Xamarin.Forms;
-using UserApp.Pages;
+using UserApp.Services;
 
 namespace UserApp
 {
     public partial class App : Application
     {
+        public static MasterDetailPage MasterDetailPage;
+
+
         public App(AppSetup setup)
         {
             InitializeComponent();
 
             AppContainer.Container = setup.CreateContainer();
 
-            MainPage = new MainDetailedPage();
-
+            this.ShowMainPage();
         }
 
         protected override void OnStart()

@@ -135,6 +135,9 @@
   <data name="Message_WrongUserName" xml:space="preserve">
     <value>User name incorrect</value>
   </data>
+  <data name="PageBButtonCaption" xml:space="preserve">
+    <value>Navigate to Page B</value>
+  </data>
   <data name="UserNameLabel" xml:space="preserve">
     <value>Enter user name:</value>
   </data>

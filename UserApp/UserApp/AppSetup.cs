@@ -24,8 +24,8 @@ namespace UserApp
         private static void RegisterViewModels(ContainerBuilder builder)
         {
             builder.RegisterType<LoginViewModel>().SingleInstance();
+            builder.RegisterType<LogoutPageViewModel>().SingleInstance();
             builder.RegisterType<MainPageViewModel>().SingleInstance();
-            builder.RegisterType<MainDetailedPageViewModel>().SingleInstance();
         }
     }
 }

@@ -36,7 +36,8 @@
             Focused="UserNameEntry_OnFocused"
             Placeholder="{x:Static userApp:AppResources.UserNamePlaceholder}"
             Style="{StaticResource ValidatableEntry}"
-            Text="{Binding UserName}" />
+            Text="{Binding UserName}"
+            TextChanged="UserNameEntry_OnTextChanged" />
         <Button
             x:Name="LoginButton"
             Command="{Binding DoLoginCommand}"

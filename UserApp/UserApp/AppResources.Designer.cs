@@ -116,6 +116,15 @@ namespace UserApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Navigate to Page B.
+        /// </summary>
+        internal static string PageBButtonCaption {
+            get {
+                return ResourceManager.GetString("PageBButtonCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter user name:.
         /// </summary>
         internal static string UserNameLabel {

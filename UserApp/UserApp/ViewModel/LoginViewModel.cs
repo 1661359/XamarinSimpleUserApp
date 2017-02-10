@@ -6,7 +6,6 @@ using System.Windows.Input;
 using IronKit.Validation;
 using IronKit.Validation.Utils;
 using PropertyChanged;
-using UserApp.Pages;
 using UserApp.Services;
 using UserApp.Services.ApiWrapper;
 using UserApp.Shared.Contracts;
@@ -21,7 +20,7 @@ namespace UserApp.ViewModel
         private readonly IApiProvider apiProvider;
         private readonly AppSessionConfig appSessionConfig;
 
-        private bool canLogin = true;
+        private bool canLogin;
 
         public ICommand DoLoginCommand
         {
@@ -54,14 +53,13 @@ namespace UserApp.ViewModel
             this.apiProvider = apiProvider;
             this.appSessionConfig = appSessionConfig;
             ValidationInfo = new ValidationInfo<LoginViewModel>(this);
-            ValidationInfo.ValidationOccurred += ValidationOccurredEventHandler;
             DoLoginCommand = new Command(async () => await DoLogin(),() => canLogin);
             
         }
 
-        private void ValidationOccurredEventHandler(object sender, ValidationOccurredEventArgs e)
+        public void ValidateUserName()
         {
-            var isUserNameValid = e.InvalidProperties.Any(x => x == nameof(UserName));
+            var isUserNameValid = ValidationInfo.GetInvalidProperties().All(x => x != nameof(UserName));
             EnableDoLoginCommand(isUserNameValid);
         }
 
@@ -111,7 +109,7 @@ namespace UserApp.ViewModel
             {
                 UserName = string.Empty;
                 IsMessageVisible = false;
-                Application.Current.MainPage = new MainDetailedPage();
+                Application.Current.ShowMainPage();
             }
         }
 

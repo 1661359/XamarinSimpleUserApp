@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using System;
+using Xamarin.Forms;
 
 namespace UserApp.Pages
 {
@@ -7,6 +8,11 @@ namespace UserApp.Pages
         public PageA()
         {
             InitializeComponent();
+        }
+
+        private async void Button_OnClicked(object sender, EventArgs e)
+        {
+            await App.MasterDetailPage.Detail.Navigation.PushAsync(new PageB());
         }
     }
 }

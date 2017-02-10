@@ -15,5 +15,10 @@ namespace UserApp.Pages
         {
             ViewModel.IsMessageVisible = false;
         }
+
+        private void UserNameEntry_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            ViewModel.ValidateUserName();
+        }
     }
 }

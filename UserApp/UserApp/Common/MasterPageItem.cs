@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace UserApp.Pages
+namespace UserApp.Common
 {
     public class MasterPageItem
     {

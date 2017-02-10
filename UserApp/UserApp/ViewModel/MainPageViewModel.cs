@@ -1,6 +1,4 @@
-﻿using System.Windows.Input;
-using PropertyChanged;
-using UserApp.Pages;
+﻿using PropertyChanged;
 using UserApp.Services;
 using Xamarin.Forms;
 
@@ -11,40 +9,16 @@ namespace UserApp.ViewModel
     {
         private readonly AppSessionConfig appSessionConfig;
 
-        public string UserName
-        {
-            get;
-            set;
-        }
-
-        public ICommand LoadUserNameCommand
-        {
-            get;
-            private set;
-        }
-        public ICommand DoLogoutCommand
-        {
-            get;
-            private set;
-        }
-
-
         public MainPageViewModel(AppSessionConfig appSessionConfig)
         {
             this.appSessionConfig = appSessionConfig;
-            LoadUserNameCommand = new Command(LoadUserName);
-            DoLogoutCommand = new Command(DoLogout);
         }
 
-        private void LoadUserName()
+        public void LoadLoginPageWhenNotLogged()
         {
-            UserName = appSessionConfig.UserName;
+            if (!appSessionConfig.IsLoggedIn)
+                Application.Current.ShowLoginPage();
         }
 
-        private void DoLogout()
-        {
-            appSessionConfig.DoLogout(); 
-            Application.Current.MainPage = new LoginPage();
-        }
     }
 }
