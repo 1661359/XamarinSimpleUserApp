@@ -10,7 +10,7 @@
     NavigationPage.HasBackButton="False">
     <local:LoginPage.Resources>
         <ResourceDictionary>
-            <Style x:Key="ValidatableEntry" TargetType="Entry">
+            <Style x:Key="ValidatableEntryStyle" TargetType="Entry">
                 <Style.Triggers>
                     <Trigger TargetType="Entry" Property="validation:Validation.ValidationState" Value="Invalid">
                         <Setter Property="PlaceholderColor" Value="Red" />
@@ -35,9 +35,8 @@
             validation:Validation.ValidateOn="PropertyChange"
             Focused="UserNameEntry_OnFocused"
             Placeholder="{x:Static userApp:AppResources.UserNamePlaceholder}"
-            Style="{StaticResource ValidatableEntry}"
-            Text="{Binding UserName}"
-            TextChanged="UserNameEntry_OnTextChanged" />
+            Style="{StaticResource ValidatableEntryStyle}"
+            Text="{Binding UserName}" />
         <Button
             x:Name="LoginButton"
             Command="{Binding DoLoginCommand}"
@@ -45,7 +44,7 @@
             Text="{x:Static userApp:AppResources.LoginButtonCaption}" />
         <Label
             HorizontalTextAlignment="Center"
-            IsVisible="{Binding IsMessageVisible}"
+            IsVisible="{Binding IsShowMessage}"
             Text="{Binding LoginMessage}" />
     </StackLayout>
 </local:LoginPageBase>

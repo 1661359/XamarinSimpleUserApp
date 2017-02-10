@@ -1,5 +1,5 @@
-﻿using Xamarin.Forms;
-using UserApp.Services;
+﻿using UserApp.Helpers;
+using Xamarin.Forms;
 
 namespace UserApp
 {

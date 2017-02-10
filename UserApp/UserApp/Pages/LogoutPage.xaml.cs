@@ -8,11 +8,7 @@ namespace UserApp.Pages
     {
         public LogoutPage()
         {
-            InitializeComponent();          
-        }
-
-        protected override void OnAppearing()
-        {
+            InitializeComponent();
             ViewModel.LoadUserNameCommand.Execute(ViewModel);
         }
     }

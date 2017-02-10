@@ -1,13 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage
+<pages:MenuPageBase
     x:Class="UserApp.Pages.MenuPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pages="clr-namespace:UserApp.Pages;assembly=UserApp"
     xmlns:userApp="clr-namespace:UserApp;assembly=UserApp"
     Title="{x:Static userApp:AppResources.ApplicationName}">
     <StackLayout VerticalOptions="FillAndExpand">
         <ListView
             x:Name="MasterPageListView"
+            ItemsSource="{Binding MenuItems}"
             SeparatorVisibility="None"
             VerticalOptions="FillAndExpand">
             <ListView.ItemTemplate>
@@ -18,4 +20,4 @@
         </ListView>
     </StackLayout>
 
-</ContentPage>
+</pages:MenuPageBase>

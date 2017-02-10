@@ -1,11 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using IronKit.Validation;
 using IronKit.Validation.Utils;
 using PropertyChanged;
+using UserApp.Helpers;
 using UserApp.Services;
 using UserApp.Services.ApiWrapper;
 using UserApp.Shared.Contracts;
@@ -15,7 +18,7 @@ using Xamarin.Forms;
 namespace UserApp.ViewModel
 {
     [ImplementPropertyChanged]
-    public class LoginViewModel : IViewModel, IValidatable<LoginViewModel>
+    public class LoginViewModel : IViewModel, IValidatable<LoginViewModel>, INotifyPropertyChanged
     {
         private readonly IApiProvider apiProvider;
         private readonly AppSessionConfig appSessionConfig;
@@ -41,7 +44,7 @@ namespace UserApp.ViewModel
             set;
         }
 
-        public bool IsMessageVisible
+        public bool IsShowMessage
         {
             get;
             set;
@@ -54,7 +57,7 @@ namespace UserApp.ViewModel
             this.appSessionConfig = appSessionConfig;
             ValidationInfo = new ValidationInfo<LoginViewModel>(this);
             DoLoginCommand = new Command(async () => await DoLogin(),() => canLogin);
-            
+            this.AddPropertyChangeHandler(ValidateUserName, m => m.UserName);
         }
 
         public void ValidateUserName()
@@ -99,26 +102,38 @@ namespace UserApp.ViewModel
 
         private void ShowMessage(string message)
         {
-            IsMessageVisible = true;
+            IsShowMessage = true;
             LoginMessage = message;
         }
-
+        
         public void NavigateToMainPageWhenLoggedIn()
         {
             if (appSessionConfig.IsLoggedIn)
             {
                 UserName = string.Empty;
-                IsMessageVisible = false;
+                IsShowMessage = false;
                 Application.Current.ShowMainPage();
             }
         }
-
+        
         public void EnableDoLoginCommand(bool state)
         {
             canLogin = state;
             ((Command)DoLoginCommand).ChangeCanExecute();
         }
+        public void HideMessage()
+        {
+            IsShowMessage = false;
+        }
 
         public ValidationInfo<LoginViewModel> ValidationInfo { get; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [Annotations.NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

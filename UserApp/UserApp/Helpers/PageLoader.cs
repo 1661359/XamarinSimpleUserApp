@@ -1,7 +1,7 @@
 ﻿using UserApp.Pages;
 using Xamarin.Forms;
 
-namespace UserApp.Services
+namespace UserApp.Helpers
 {
     public static class PageLoader
     {

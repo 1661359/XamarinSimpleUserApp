@@ -26,6 +26,7 @@ namespace UserApp
             builder.RegisterType<LoginViewModel>().SingleInstance();
             builder.RegisterType<LogoutPageViewModel>().SingleInstance();
             builder.RegisterType<MainPageViewModel>().SingleInstance();
+            builder.RegisterType<MenuPageViewModel>().SingleInstance();
         }
     }
 }

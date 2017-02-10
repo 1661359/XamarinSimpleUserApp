@@ -13,12 +13,7 @@ namespace UserApp.Pages
 
         private void UserNameEntry_OnFocused(object sender, FocusEventArgs e)
         {
-            ViewModel.IsMessageVisible = false;
-        }
-
-        private void UserNameEntry_OnTextChanged(object sender, TextChangedEventArgs e)
-        {
-            ViewModel.ValidateUserName();
+            ViewModel.HideMessage();
         }
     }
 }
