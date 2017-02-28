@@ -100,7 +100,7 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
-	<None Include="readme.md" />
+    <None Include="readme.md" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Default-568h%402x.png" />
@@ -126,7 +126,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="IronKit.Validation, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\IronKit.Validation.2.0.3\lib\portable45-net45+win8+wp8+wpa81\IronKit.Validation.dll</HintPath>
+      <HintPath>..\..\packages\IronKit.Validation.2.0.5\lib\portable45-net45+win8+wp8+wpa81\IronKit.Validation.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">

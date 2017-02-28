@@ -18,7 +18,7 @@ namespace UserApp.ViewModel
         {
             MenuItems = new List<MasterPageItem>
             {
-                new MasterPageItem {TargetType = typeof(PageA), Title = "PageA"},
+                new MasterPageItem {TargetType = typeof(ProductPage), Title = "Products"},
                 new MasterPageItem {TargetType = typeof(PageB), Title = "PageB"},
                 new MasterPageItem {TargetType = typeof(LogoutPage), Title = "Logout page"},
             };
