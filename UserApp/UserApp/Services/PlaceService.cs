@@ -9,13 +9,13 @@ namespace UserApp.Services
         {
             return new List<Place>
             {
-                new Place() {Name = "1", AverageCost = 3},
-                new Place() {Name = "2", AverageCost = 3},
-                new Place() {Name = "3", AverageCost = 3},
-                new Place() {Name = "5", AverageCost = 3},
-                new Place() {Name = "6", AverageCost = 3},
-                new Place() {Name = "4", AverageCost = 3},
-                new Place() {Name = "7", AverageCost = 3}
+                new Place() {Name = "1", AverageCost = 3, Address = "Some Address"},
+                new Place() {Name = "2", AverageCost = 3, Address = "Some Address"},
+                new Place() {Name = "3", AverageCost = 3, Address = "Some Address"},
+                new Place() {Name = "5", AverageCost = 3, Address = "Some Address"},
+                new Place() {Name = "6", AverageCost = 3, Address = "Some Address"},
+                new Place() {Name = "4", AverageCost = 3, Address = "Some Address"},
+                new Place() {Name = "7", AverageCost = 3, Address = "Some Address"}
             };
         }
 

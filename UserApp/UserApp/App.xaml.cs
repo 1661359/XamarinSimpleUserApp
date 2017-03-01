@@ -1,4 +1,5 @@
 ﻿using UserApp.Helpers;
+using UserApp.Helpers.Mappers;
 using Xamarin.Forms;
 
 namespace UserApp
@@ -13,6 +14,7 @@ namespace UserApp
             InitializeComponent();
 
             AppContainer.Container = setup.CreateContainer();
+            PlaceMapper.CreateMap();
 
             this.ShowMainPage();
         }

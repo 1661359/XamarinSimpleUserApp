@@ -22,13 +22,7 @@ namespace UserApp.Shared.Models
             set;
         }
 
-        public List<string> WorkingTime
-        {
-            get;
-            set;
-        }
-        
-        public List<string> PicturesUrls
+        public IEnumerable<string> PicturesUrls
         {
             get;
             set;

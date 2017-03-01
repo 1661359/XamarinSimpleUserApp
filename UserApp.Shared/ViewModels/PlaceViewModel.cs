@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-
-namespace UserApp.Shared.Models
+﻿namespace UserApp.Shared.ViewModels
 {
-    public class Place
+    public class PlaceViewModel
     {
         public string Name
         {
@@ -22,7 +20,13 @@ namespace UserApp.Shared.Models
             set;
         }
 
-        public IEnumerable<WorkingTime> WorkDays
+        public double Distance
+        {
+            get;
+            set;
+        }
+
+        public string WorkingTimeToday
         {
             get;
             set;

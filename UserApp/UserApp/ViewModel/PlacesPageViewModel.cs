@@ -3,8 +3,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using PropertyChanged;
 using UserApp.Helpers;
+using UserApp.Helpers.Mappers;
 using UserApp.Pages;
 using UserApp.Services;
+using UserApp.Shared.ViewModels;
 using Place = UserApp.Shared.Models.Place;
 
 namespace UserApp.ViewModel
@@ -14,13 +16,13 @@ namespace UserApp.ViewModel
     {
         private readonly IPlaceService placeService;
 
-        public List<Place> Places
+        public List<PlaceViewModel> Places
         {
             get;
             set;
         }
 
-        public Place SelectedPlace
+        public PlaceViewModel SelectedPlace
         {
             get;
             set;
@@ -29,9 +31,9 @@ namespace UserApp.ViewModel
         public PlacesPageViewModel(IPlaceService placeService)
         {
             this.placeService = placeService;
-            Places = placeService.GetPlaces().ToList();
+            Places = placeService.GetPlaces().Select(PlaceMapper.GetPlaceViewModel).ToList();
         }
-
+        
         public async Task NavigateToDetails()
         {
             await NavigationHelper.GetPagesNavigation().PushAsync(new PlaceDetailsPage(SelectedPlace.Name));

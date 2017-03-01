@@ -37,11 +37,14 @@
     <Compile Include="Contracts\AuthorizationAnswer.cs" />
     <Compile Include="Models\Place.cs" />
     <Compile Include="Models\PlaceDetails.cs" />
+    <Compile Include="Models\WorkingTime.cs" />
+    <Compile Include="ViewModels\PlaceViewModel.cs" />
     <Compile Include="ViewModels\UserAuthorizationViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

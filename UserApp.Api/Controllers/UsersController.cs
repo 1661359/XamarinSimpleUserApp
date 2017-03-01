@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Web.Http;
 using UserApp.Shared.Contracts;
 using UserApp.Shared.ViewModels;
@@ -13,6 +14,10 @@ namespace UserApp.Api.Controllers
         [ActionName("Login")]
         public UserAuthorizationViewModel Login([FromBody]UserAuthorizationViewModel userAuthorizationViewModel)
         {
+            if (userAuthorizationViewModel == null)
+            {
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            }
             const string baseUserName = "raiden";
             var result = new UserAuthorizationViewModel
             {
