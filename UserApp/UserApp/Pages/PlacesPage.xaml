@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PlacesPageBase
+    x:Class="UserApp.Pages.PlacesPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:common="clr-namespace:UserApp.Common;assembly=UserApp"
+    xmlns:controls="clr-namespace:IronKit.Controls;assembly=IronKit.RoundedView"
+    xmlns:pages="clr-namespace:UserApp.Pages;assembly=UserApp">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <common:CostValueConverter x:Key="CostValueConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <StackLayout>
+        <Label
+            FontSize="Large"
+            HorizontalOptions="Center"
+            Text="Places" />
+        <ListView
+            x:Name="ListView"
+            ItemTapped="ListView_OnItemTapped"
+            ItemsSource="{Binding Places}"
+            RowHeight="80"
+            SelectedItem="{Binding SelectedPlace, Mode=TwoWay}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="10*" />
+                                <ColumnDefinition Width="3*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <StackLayout
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                VerticalOptions="Center">
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="Large"
+                                    Text="{Binding Name}" />
+                                <Label Text="Description" />
+                            </StackLayout>
+                            <StackLayout
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                HorizontalOptions="End"
+                                VerticalOptions="Center">
+                                <Label
+                                    FontSize="Medium"
+                                    HorizontalTextAlignment="End"
+                                    Text="{Binding AverageCost, Converter={StaticResource CostValueConverter}}"
+                                    TextColor="#FF99CC" />
+                                <controls:RoundedView
+                                    Padding="3,2"
+                                    BackgroundColor="#E2DDDD"
+                                    CornerRadius="20"
+                                    HorizontalOptions="Center">
+                                    <Label Margin="2" Text="120mi" />
+                                </controls:RoundedView>
+                            </StackLayout>
+                            <StackLayout
+                                Grid.Row="0"
+                                Grid.Column="2"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center">
+                                <Image HeightRequest="20" WidthRequest="20">
+                                    <Image.Source>
+                                        <FileImageSource File="next.png" />
+                                    </Image.Source>
+                                </Image>
+                            </StackLayout>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</pages:PlacesPageBase>

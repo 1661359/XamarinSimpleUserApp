@@ -60,6 +60,14 @@
       <HintPath>..\..\packages\IronKit.Common.1.0.0\lib\portable45-net45+win8+wp8+wpa81\IronKit.Common.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="IronKit.RoundedView, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\IronKit.RoundedView.1.0.3\lib\MonoAndroid\IronKit.RoundedView.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="IronKit.RoundedView.Droid, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\IronKit.RoundedView.1.0.3\lib\MonoAndroid\IronKit.RoundedView.Droid.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="IronKit.Validation, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\IronKit.Validation.2.0.5\lib\portable45-net45+win8+wp8+wpa81\IronKit.Validation.dll</HintPath>
       <Private>True</Private>
@@ -167,6 +175,9 @@
       <Project>{16856977-3e45-494c-a621-1b71f225fcf8}</Project>
       <Name>UserApp</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\next.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

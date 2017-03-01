@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using PropertyChanged;
 using UserApp.Common;
-using UserApp.Pages;
+using UserApp.Helpers;
 
 namespace UserApp.ViewModel
 {
@@ -16,12 +16,7 @@ namespace UserApp.ViewModel
 
         public MenuPageViewModel()
         {
-            MenuItems = new List<MasterPageItem>
-            {
-                new MasterPageItem {TargetType = typeof(ProductPage), Title = "Products"},
-                new MasterPageItem {TargetType = typeof(PageB), Title = "PageB"},
-                new MasterPageItem {TargetType = typeof(LogoutPage), Title = "Logout page"},
-            };
+            MenuItems = NavigationHelper.GetMenuItems();
         }
     }
 }

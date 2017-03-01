@@ -1,6 +1,8 @@
 ﻿using PropertyChanged;
 using UserApp.Helpers;
 using UserApp.Services;
+using UserApp.Shared.Contracts;
+using UserApp.Shared.ViewModels;
 using Xamarin.Forms;
 
 namespace UserApp.ViewModel
@@ -17,6 +19,8 @@ namespace UserApp.ViewModel
 
         public void LoadLoginPageWhenNotLogged()
         {
+            //clear
+            appSessionConfig.LoadAuthorizationResult(new UserAuthorizationViewModel() {AuthorizationAnswer = AuthorizationAnswer.Ok, UserName = "LOL"});
             if (!appSessionConfig.IsLoggedIn)
                 Application.Current.ShowLoginPage();
         }

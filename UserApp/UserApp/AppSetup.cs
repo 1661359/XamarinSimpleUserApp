@@ -3,6 +3,7 @@ using UserApp.Services;
 using UserApp.Services.ApiWrapper;
 using UserApp.ViewModel;
 
+
 namespace UserApp
 {
     public class AppSetup
@@ -19,6 +20,7 @@ namespace UserApp
             RegisterViewModels(builder);
             builder.RegisterInstance<IApiProvider>(new ApiProvider());
             builder.RegisterInstance(new AppSessionConfig());
+            builder.RegisterType<PlaceService>().As<IPlaceService>();
         }
 
         private static void RegisterViewModels(ContainerBuilder builder)
@@ -27,6 +29,9 @@ namespace UserApp
             builder.RegisterType<LogoutPageViewModel>().SingleInstance();
             builder.RegisterType<MainPageViewModel>().SingleInstance();
             builder.RegisterType<MenuPageViewModel>().SingleInstance();
+            builder.RegisterType<PlacesPageViewModel>().SingleInstance();
+            builder.RegisterType<PlaceDetailsPageViewModel>().SingleInstance();
+
         }
     }
 }

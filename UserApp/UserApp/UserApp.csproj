@@ -44,6 +44,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Common\CostValueConverter.cs" />
+    <Compile Include="Helpers\NavigationHelper.cs" />
     <Compile Include="Helpers\NotifyPropertyChangeHelpers.cs" />
     <Compile Include="Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -52,11 +54,11 @@
       <DependentUpon>MenuPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Common\MasterPageItem.cs" />
-    <Compile Include="Pages\ProductPage.xaml.cs">
-      <DependentUpon>ProductPage.xaml</DependentUpon>
+    <Compile Include="Pages\PlacesPage.xaml.cs">
+      <DependentUpon>PlacesPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\PageB.xaml.cs">
-      <DependentUpon>PageB.xaml</DependentUpon>
+    <Compile Include="Pages\PlaceDetailsPage.xaml.cs">
+      <DependentUpon>PlaceDetailsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Services\AppSessionConfig.cs" />
@@ -72,12 +74,16 @@
     <Compile Include="Services\ApiWrapper\IUsersApi.cs" />
     <Compile Include="AppSetup.cs" />
     <Compile Include="Helpers\PageLoader.cs" />
+    <Compile Include="Services\IPlaceService.cs" />
+    <Compile Include="Services\PlaceService.cs" />
     <Compile Include="ViewModel\IViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\MainPageViewModel.cs" />
     <Compile Include="ViewModel\LogoutPageViewModel.cs" />
     <Compile Include="ViewModel\MenuPageViewModel.cs" />
+    <Compile Include="ViewModel\PlaceDetailsPageViewModel.cs" />
+    <Compile Include="ViewModel\PlacesPageViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AppResources.resx">
@@ -105,6 +111,10 @@
     </Reference>
     <Reference Include="IronKit.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\IronKit.Common.1.0.0\lib\portable45-net45+win8+wp8+wpa81\IronKit.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="IronKit.RoundedView, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\IronKit.RoundedView.1.0.3\lib\portable45-net45+win8+wp8+wpa81\IronKit.RoundedView.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="IronKit.Validation, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -194,13 +204,13 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Pages\ProductPage.xaml">
+    <EmbeddedResource Include="Pages\PlacesPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Pages\PageB.xaml">
+    <EmbeddedResource Include="Pages\PlaceDetailsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

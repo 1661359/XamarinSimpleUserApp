@@ -35,6 +35,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Contracts\AuthorizationAnswer.cs" />
+    <Compile Include="Models\Place.cs" />
+    <Compile Include="Models\PlaceDetails.cs" />
     <Compile Include="ViewModels\UserAuthorizationViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
