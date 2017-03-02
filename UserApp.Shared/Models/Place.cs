@@ -1,9 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace UserApp.Shared.Models
 {
     public class Place
     {
+        public Guid Id
+        {
+            get;
+            set;
+        }
+
         public string Name
         {
             get;

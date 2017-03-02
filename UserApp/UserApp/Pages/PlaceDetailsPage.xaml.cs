@@ -1,4 +1,5 @@
-﻿using UserApp.ViewModel;
+﻿using System;
+using UserApp.ViewModel;
 
 namespace UserApp.Pages
 {
@@ -10,9 +11,9 @@ namespace UserApp.Pages
             InitializeComponent();
         }
 
-        public PlaceDetailsPage(string name) : this()
+        public PlaceDetailsPage(Guid id) : this()
         {
-            ViewModel.LoadPlaceDetails(name);
+            ViewModel.LoadPlaceDetails(id);
         }
     }
 }

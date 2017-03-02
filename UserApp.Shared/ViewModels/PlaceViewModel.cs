@@ -1,4 +1,6 @@
-﻿namespace UserApp.Shared.ViewModels
+﻿using System;
+
+namespace UserApp.Shared.ViewModels
 {
     public class PlaceViewModel
     {
@@ -7,6 +9,13 @@
             get;
             set;
         }
+
+        public Guid Id
+        {
+            get;
+            set;
+        }
+
 
         public string Address
         {

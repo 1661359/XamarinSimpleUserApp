@@ -1,11 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using UserApp.Shared.Models;
 
 namespace UserApp.Services
 {
     public interface IPlaceService
     {
-        IEnumerable<Place> GetPlaces();
-        PlaceDetails GetPlaceDetails(string placeName);
+        Task<IEnumerable<Place>> GetPlaces();
+        Task<PlaceDetails> GetPlaceDetails(Guid id);
     }
 }

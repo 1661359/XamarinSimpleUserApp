@@ -13,7 +13,7 @@ namespace UserApp.Helpers.Mappers
             Mapper.CreateMap<Place, PlaceViewModel>();
         }
 
-        public static PlaceViewModel GetPlaceViewModel(Place place)
+        public static PlaceViewModel MapToPlaceViewModel(Place place)
         {
             var result = Mapper.Map<PlaceViewModel>(place);
             var currentDay = DateTime.Now.DayOfWeek;

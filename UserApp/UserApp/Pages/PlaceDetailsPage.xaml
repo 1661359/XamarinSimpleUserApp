@@ -6,8 +6,7 @@
     xmlns:pages="clr-namespace:UserApp.Pages;assembly=UserApp">
     <Label
         x:Name="Label"
-        BindingContext="{Binding PlaceDetails}"
         HorizontalOptions="Center"
-        Text="{Binding Name}"
+        Text="{Binding PlaceDetails.Result.Name}"
         VerticalOptions="Center" />
 </pages:PlaceDetailsPageBase>

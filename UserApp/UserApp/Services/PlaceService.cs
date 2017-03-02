@@ -1,27 +1,29 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using UserApp.Services.ApiWrapper;
 using UserApp.Shared.Models;
 
 namespace UserApp.Services
 {
     public class PlaceService : IPlaceService
     {
-        public IEnumerable<Place> GetPlaces()
+        private readonly IApiProvider apiProvider;
+        public PlaceService(IApiProvider apiProvider)
         {
-            return new List<Place>
-            {
-                new Place() {Name = "1", AverageCost = 3, Address = "Some Address"},
-                new Place() {Name = "2", AverageCost = 3, Address = "Some Address"},
-                new Place() {Name = "3", AverageCost = 3, Address = "Some Address"},
-                new Place() {Name = "5", AverageCost = 3, Address = "Some Address"},
-                new Place() {Name = "6", AverageCost = 3, Address = "Some Address"},
-                new Place() {Name = "4", AverageCost = 3, Address = "Some Address"},
-                new Place() {Name = "7", AverageCost = 3, Address = "Some Address"}
-            };
+            this.apiProvider = apiProvider;
+        }
+        public async Task<IEnumerable<Place>> GetPlaces()
+        {
+            var cancelationToken = new CancellationTokenSource();
+            return await apiProvider.MakeRequest(ct => apiProvider.PlaceApi.GetAll(ct), cancelationToken.Token);
         }
 
-        public PlaceDetails GetPlaceDetails(string productName)
+        public async Task<PlaceDetails> GetPlaceDetails(Guid id)
         {
-            return new PlaceDetails() { Name = productName };
+            var cancelationToken = new CancellationTokenSource();
+            return await apiProvider.MakeRequest(ct => apiProvider.PlaceDetailsApi.GetPlaceDetails(id, ct), cancelationToken.Token);
         }
     }
 }

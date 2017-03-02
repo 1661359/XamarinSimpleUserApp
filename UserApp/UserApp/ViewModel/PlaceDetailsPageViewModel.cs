@@ -1,4 +1,6 @@
-﻿using PropertyChanged;
+﻿using System;
+using PropertyChanged;
+using UserApp.Common;
 using UserApp.Services;
 using UserApp.Shared.Models;
 
@@ -8,7 +10,7 @@ namespace UserApp.ViewModel
     public class PlaceDetailsPageViewModel : IViewModel
     {
         private readonly IPlaceService placeService;
-        public PlaceDetails PlaceDetails
+        public NotifyTaskCompletion<PlaceDetails> PlaceDetails
         {
             get;
             set;
@@ -19,9 +21,9 @@ namespace UserApp.ViewModel
             this.placeService = placeService;
         }
 
-        public void LoadPlaceDetails(string placeName)
+        public void LoadPlaceDetails(Guid id)
         {
-            PlaceDetails = placeService.GetPlaceDetails(placeName);
+            PlaceDetails = new NotifyTaskCompletion<PlaceDetails>(placeService.GetPlaceDetails(id));
         }
     }
 }

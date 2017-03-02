@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
 using System.Threading;
@@ -10,11 +11,22 @@ namespace UserApp.Services.ApiWrapper
 {
     public class ApiProvider : IApiProvider
     {
+        private const string ApiHostUrl = "http://192.168.168.2/userapi/";
+
         public IUsersApi UsersApi { get; }
+        public IPlaceApi PlaceApi { get; }
+        public IPlaceDetailsApi PlaceDetailsApi { get; }
 
         public ApiProvider()
         {
-            UsersApi = RestService.For<IUsersApi>("http://192.168.168.2/userapi/users");
+            UsersApi = RestService.For<IUsersApi>(GetApiUrl("users"));
+            PlaceApi = RestService.For<IPlaceApi>(GetApiUrl("place"));
+            PlaceDetailsApi = RestService.For<IPlaceDetailsApi>(GetApiUrl("placedetails"));
+        }
+
+        private static string GetApiUrl(string api)
+        {
+            return ApiHostUrl + api;
         }
         
         public async Task<T> MakeRequest<T>(Func<CancellationToken, Task<T>> loadingFunction, CancellationToken cancellationToken)
@@ -31,8 +43,13 @@ namespace UserApp.Services.ApiWrapper
             catch (Exception e)
             {
                 exception = e;
+            }
+            if (exception != null)
+            {
+                Debug.WriteLine(exception.Message);
             }           
             return result;
         }
+
     }
 }

@@ -11,6 +11,16 @@ namespace UserApp.Services.ApiWrapper
             get;
         }
 
+        IPlaceApi PlaceApi
+        {
+            get;
+        }
+
+        IPlaceDetailsApi PlaceDetailsApi
+        {
+            get;
+        }
+
         Task<T> MakeRequest<T>(Func<CancellationToken, Task<T>> loadingFunction,
             CancellationToken cancellationToken);
     }
