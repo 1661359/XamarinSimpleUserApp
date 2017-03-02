@@ -5,17 +5,16 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:common="clr-namespace:UserApp.Common;assembly=UserApp"
     xmlns:controls="clr-namespace:IronKit.Controls;assembly=IronKit.RoundedView"
-    xmlns:pages="clr-namespace:UserApp.Pages;assembly=UserApp">
+    xmlns:pages="clr-namespace:UserApp.Pages;assembly=UserApp"
+    xmlns:userApp="clr-namespace:UserApp;assembly=UserApp"
+    Title="{x:Static userApp:AppResources.LocationsTitle}">
     <ContentPage.Resources>
         <ResourceDictionary>
             <common:CostValueConverter x:Key="CostValueConverter" />
+            <common:DistanceValueConverter x:Key="DistanceValueConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <StackLayout>
-        <Label
-            FontSize="Large"
-            HorizontalOptions="Center"
-            Text="Places" />
         <ListView
             x:Name="ListView"
             ItemTapped="ListView_OnItemTapped"
@@ -62,7 +61,7 @@
                                     HorizontalOptions="Center">
                                     <Label
                                         Margin="2"
-                                        Text="{Binding Distance}"
+                                        Text="{Binding Distance, Converter={StaticResource DistanceValueConverter}}"
                                         TextColor="Navy" />
                                 </controls:RoundedView>
                             </StackLayout>

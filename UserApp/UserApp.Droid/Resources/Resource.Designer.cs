@@ -2203,8 +2203,14 @@ namespace UserApp.Droid
 			// aapt resource value: 0x7f0200a1
 			public const int next = 2130837665;
 			
+			// aapt resource value: 0x7f0200a4
+			public const int notification_template_icon_bg = 2130837668;
+			
 			// aapt resource value: 0x7f0200a2
-			public const int notification_template_icon_bg = 2130837666;
+			public const int smartphone = 2130837666;
+			
+			// aapt resource value: 0x7f0200a3
+			public const int time = 2130837667;
 			
 			static Drawable()
 			{

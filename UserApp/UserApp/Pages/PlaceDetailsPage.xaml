@@ -3,10 +3,166 @@
     x:Class="UserApp.Pages.PlaceDetailsPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:pages="clr-namespace:UserApp.Pages;assembly=UserApp">
-    <Label
-        x:Name="Label"
-        HorizontalOptions="Center"
-        Text="{Binding PlaceDetails.Result.Name}"
-        VerticalOptions="Center" />
+    xmlns:common="clr-namespace:UserApp.Common;assembly=UserApp"
+    xmlns:controls="clr-namespace:IronKit.Controls;assembly=IronKit.RoundedView"
+    xmlns:pages="clr-namespace:UserApp.Pages;assembly=UserApp"
+    xmlns:userApp="clr-namespace:UserApp;assembly=UserApp"
+    Title="{x:Static userApp:AppResources.SearchResultTitle}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <common:CostValueConverter x:Key="CostValueConverter" />
+            <common:DistanceValueConverter x:Key="DistanceValueConverter" />
+            <common:TimeValueConverter x:Key="TimeValueConverter" />
+            <Style x:Key="SeparatorStyle" TargetType="StackLayout">
+                <Setter Property="Margin" Value="10,3" />
+                <Setter Property="BackgroundColor" Value="Silver" />
+                <Setter Property="HeightRequest" Value="1" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+            </Style>
+            <Style x:Key="IconStyle" TargetType="Image">
+                <Setter Property="Margin" Value="3" />
+                <Setter Property="HeightRequest" Value="30" />
+                <Setter Property="WidthRequest" Value="30" />
+                <Setter Property="Aspect" Value="AspectFit" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ScrollView>
+        <StackLayout>
+            <Grid Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10*" />
+                    <ColumnDefinition Width="3*" />
+                </Grid.ColumnDefinitions>
+                <StackLayout
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    VerticalOptions="Center">
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="Large"
+                        Text="{Binding PlaceDetails.Result.Name}" />
+                    <Label Text="{Binding PlaceDetails.Result.Address}" />
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    HorizontalOptions="End"
+                    VerticalOptions="Center">
+                    <Label
+                        FontSize="Medium"
+                        HorizontalTextAlignment="End"
+                        Text="{Binding PlaceDetails.Result.AverageCost, Converter={StaticResource CostValueConverter}}"
+                        TextColor="#FF99CC" />
+                    <controls:RoundedView
+                        Padding="3,2"
+                        BackgroundColor="#E2DDDD"
+                        CornerRadius="20"
+                        HorizontalOptions="Center">
+                        <Label
+                            Margin="2"
+                            Text="{Binding PlaceViewModel.Distance, Converter={StaticResource DistanceValueConverter}}"
+                            TextColor="Navy" />
+                    </controls:RoundedView>
+                </StackLayout>
+            </Grid>
+            <StackLayout Style="{StaticResource SeparatorStyle}" />
+            <StackLayout Margin="10" Orientation="Horizontal">
+                <Image Style="{StaticResource IconStyle}">
+                    <Image.Source>
+                        <FileImageSource File="smartphone.png" />
+                    </Image.Source>
+                </Image>
+                <Label
+                    FontSize="Large"
+                    Text="{Binding PlaceDetails.Result.PhoneNumber}"
+                    TextColor="Navy" />
+            </StackLayout>
+            <StackLayout Style="{StaticResource SeparatorStyle}" />
+            <Label Margin="10" Text="{Binding PlaceDetails.Result.Text}" />
+            <StackLayout Style="{StaticResource SeparatorStyle}" />
+            <StackLayout Margin="10" Orientation="Horizontal">
+                <Image Style="{StaticResource IconStyle}">
+                    <Image.Source>
+                        <FileImageSource File="time.png" />
+                    </Image.Source>
+                </Image>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Text="Mon - Fri" />
+                    <Label
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Text="Saturday" />
+                    <Label
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        Text="Sunday" />
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Text="{Binding WeekdaysTime.StartTime, Converter={StaticResource TimeValueConverter}}"
+                        TextColor="Navy" />
+                    <Label
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Text="{Binding SaturdayTime.StartTime, Converter={StaticResource TimeValueConverter}}"
+                        TextColor="Navy" />
+                    <Label
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        Text="{Binding SundayTime.StartTime, Converter={StaticResource TimeValueConverter}}"
+                        TextColor="Navy" />
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="2"
+                        Text="-"
+                        TextColor="Navy" />
+                    <Label
+                        Grid.Row="1"
+                        Grid.Column="2"
+                        Text="-"
+                        TextColor="Navy" />
+                    <Label
+                        Grid.Row="2"
+                        Grid.Column="2"
+                        Text="-"
+                        TextColor="Navy" />
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="3"
+                        Text="{Binding WeekdaysTime.EndTime, Converter={StaticResource TimeValueConverter}}"
+                        TextColor="Navy" />
+                    <Label
+                        Grid.Row="1"
+                        Grid.Column="3"
+                        Text="{Binding SaturdayTime.EndTime, Converter={StaticResource TimeValueConverter}}"
+                        TextColor="Navy" />
+                    <Label
+                        Grid.Row="2"
+                        Grid.Column="3"
+                        Text="{Binding SundayTime.EndTime, Converter={StaticResource TimeValueConverter}}"
+                        TextColor="Navy" />
+                </Grid>
+            </StackLayout>
+            <Image Source="{Binding PlaceDetails.Result.PicturesUrls[0]}" />
+            <Label Margin="10" Text="{Binding PlaceDetails.Result.Description}" />
+        </StackLayout>
+    </ScrollView>
 </pages:PlaceDetailsPageBase>

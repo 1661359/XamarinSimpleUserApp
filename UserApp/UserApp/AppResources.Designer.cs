@@ -71,6 +71,15 @@ namespace UserApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Locations.
+        /// </summary>
+        internal static string LocationsTitle {
+            get {
+                return ResourceManager.GetString("LocationsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Log in.
         /// </summary>
         internal static string LoginButtonCaption {
@@ -121,6 +130,15 @@ namespace UserApp {
         internal static string PageBButtonCaption {
             get {
                 return ResourceManager.GetString("PageBButtonCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search Results.
+        /// </summary>
+        internal static string SearchResultTitle {
+            get {
+                return ResourceManager.GetString("SearchResultTitle", resourceCulture);
             }
         }
         

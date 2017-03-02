@@ -47,6 +47,7 @@
     <Compile Include="Common\CostValueConverter.cs" />
     <Compile Include="Common\DistanceValueConverter.cs" />
     <Compile Include="Common\NotifyTaskCompletion.cs" />
+    <Compile Include="Common\TimeValueConverter.cs" />
     <Compile Include="Helpers\Mappers\PlaceMapper.cs" />
     <Compile Include="Helpers\NavigationHelper.cs" />
     <Compile Include="Helpers\NotifyPropertyChangeHelpers.cs" />

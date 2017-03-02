@@ -120,6 +120,9 @@
   <data name="ApplicationName" xml:space="preserve">
     <value>UserApp</value>
   </data>
+  <data name="LocationsTitle" xml:space="preserve">
+    <value>Locations</value>
+  </data>
   <data name="LoginButtonCaption" xml:space="preserve">
     <value>Log in</value>
   </data>
@@ -137,6 +140,9 @@
   </data>
   <data name="PageBButtonCaption" xml:space="preserve">
     <value>Navigate to Page B</value>
+  </data>
+  <data name="SearchResultTitle" xml:space="preserve">
+    <value>Search Results</value>
   </data>
   <data name="UserNameLabel" xml:space="preserve">
     <value>Enter user name:</value>
