@@ -14,20 +14,20 @@ namespace UserApp.Pages
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            ViewModel.CleanSelectedPlaceCommand.Execute(null);
+            //ViewModel.CleanSelectedPlaceCommand.Execute(null);
 
-            ListView.Behaviors.Add(new EventToCommandBehavior()
-            {
-                Command = ViewModel.ShowDetailsCommand,
-                EventName = "ItemSelected"
-            });
+            //ListView.Behaviors.Add(new EventToCommandBehavior()
+            //{
+            //    Command = ViewModel.ShowDetailsCommand,
+            //    EventName = "ItemSelected"
+            //});
 
         }
 
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
-            ListView.Behaviors.Clear();
+            //ListView.Behaviors.Clear();
         }
     }
 }

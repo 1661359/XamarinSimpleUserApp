@@ -3,6 +3,7 @@
     x:Class="UserApp.Pages.LogoutPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:c="clr-namespace:IronKit.Commanding;assembly=IronKit.Commanding"
     xmlns:local="clr-namespace:UserApp.Pages;assembly=UserApp"
     xmlns:userApp="clr-namespace:UserApp;assembly=UserApp"
     Title="{x:Static userApp:AppResources.ApplicationName}"
@@ -16,6 +17,6 @@
             HorizontalOptions="Center"
             Text="{Binding UserName}"
             VerticalOptions="Center" />
-        <Button Command="{Binding DoLogoutCommand}" Text="{x:Static userApp:AppResources.LogoutButtonCaption}" />
+        <Button Command="{c:Command MethodName=DoLogout}" Text="{x:Static userApp:AppResources.LogoutButtonCaption}" />
     </StackLayout>
 </local:LogoutPageBase>

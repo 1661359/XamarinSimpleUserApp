@@ -56,6 +56,10 @@
       <HintPath>..\..\packages\Xamarin.Forms.2.3.4.171-pre1\lib\MonoAndroid10\FormsViewGroup.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="IronKit.Commanding, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\IronKit.Commanding.1.0.0\lib\portable45-net45+win8+wp8+wpa81\IronKit.Commanding.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="IronKit.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\IronKit.Common.1.0.0\lib\portable45-net45+win8+wp8+wpa81\IronKit.Common.dll</HintPath>
       <Private>True</Private>

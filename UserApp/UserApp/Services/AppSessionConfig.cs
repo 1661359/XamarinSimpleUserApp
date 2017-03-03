@@ -14,6 +14,11 @@ namespace UserApp.Services
 
         public bool IsLoggedIn { get; private set; }
 
+        public AuthorizationAnswer LastAuthorizationAnswer
+        {
+            get; private set;
+        }
+
         public void LoadAuthorizationResult(UserAuthorizationViewModel model)
         {
             if (model == null)
@@ -21,6 +26,7 @@ namespace UserApp.Services
                 IsLoggedIn = false;
                 return;
             }
+            LastAuthorizationAnswer = model.AuthorizationAnswer;
             userName = model.UserName;
             token = model.Token;
             IsLoggedIn = model.AuthorizationAnswer == AuthorizationAnswer.Ok;

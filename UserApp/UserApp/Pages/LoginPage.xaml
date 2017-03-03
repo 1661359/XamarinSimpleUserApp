@@ -3,6 +3,7 @@
     x:Class="UserApp.Pages.LoginPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:c="clr-namespace:IronKit.Commanding;assembly=IronKit.Commanding"
     xmlns:local="clr-namespace:UserApp.Pages;assembly=UserApp"
     xmlns:userApp="clr-namespace:UserApp;assembly=UserApp"
     xmlns:validation="clr-namespace:IronKit.Validation;assembly=IronKit.Validation"
@@ -33,13 +34,12 @@
         <Entry
             x:Name="UserNameEntry"
             validation:Validation.ValidateOn="PropertyChange"
-            Focused="UserNameEntry_OnFocused"
             Placeholder="{x:Static userApp:AppResources.UserNamePlaceholder}"
             Style="{StaticResource ValidatableEntryStyle}"
             Text="{Binding UserName}" />
         <Button
             x:Name="LoginButton"
-            Command="{Binding DoLoginCommand}"
+            Command="{c:Command MethodName=DoLogin}"
             IsEnabled="{Binding IsLoginEnabled}"
             Text="{x:Static userApp:AppResources.LoginButtonCaption}" />
         <Label

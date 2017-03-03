@@ -20,7 +20,7 @@ namespace UserApp.ViewModel
         public void LoadLoginPageWhenNotLogged()
         {
             //clear
-            appSessionConfig.LoadAuthorizationResult(new UserAuthorizationViewModel() {AuthorizationAnswer = AuthorizationAnswer.Ok, UserName = "LOL"});
+            //appSessionConfig.LoadAuthorizationResult(new UserAuthorizationViewModel() {AuthorizationAnswer = AuthorizationAnswer.Ok, UserName = "LOL"});
             if (!appSessionConfig.IsLoggedIn)
                 Application.Current.ShowLoginPage();
         }

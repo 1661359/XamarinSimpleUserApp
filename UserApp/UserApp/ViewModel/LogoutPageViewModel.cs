@@ -22,18 +22,11 @@ namespace UserApp.ViewModel
             get;
             private set;
         }
-        public ICommand DoLogoutCommand
-        {
-            get;
-            private set;
-        }
-
 
         public LogoutPageViewModel(AppSessionConfig appSessionConfig)
         {
             this.appSessionConfig = appSessionConfig;
             LoadUserNameCommand = new Command(LoadUserName);
-            DoLogoutCommand = new Command(DoLogout);
         }
 
         private void LoadUserName()
@@ -41,7 +34,7 @@ namespace UserApp.ViewModel
             UserName = appSessionConfig.UserName;
         }
 
-        private void DoLogout()
+        public void DoLogout()
         {
             UserName = string.Empty;
             appSessionConfig.DoLogout(); 
