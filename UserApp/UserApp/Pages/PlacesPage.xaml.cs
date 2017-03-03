@@ -1,5 +1,5 @@
-﻿using UserApp.ViewModel;
-using Xamarin.Forms;
+﻿using UserApp.Common.Behaviors;
+using UserApp.ViewModel;
 
 namespace UserApp.Pages
 {
@@ -11,11 +11,23 @@ namespace UserApp.Pages
             InitializeComponent();
         }
 
-        private async void ListView_OnItemTapped(object sender, ItemTappedEventArgs itemTappedEventArgs)
+        protected override void OnAppearing()
         {
-            await ViewModel.NavigateToDetails();
+            base.OnAppearing();
+            ViewModel.CleanSelectedPlaceCommand.Execute(null);
+
+            ListView.Behaviors.Add(new EventToCommandBehavior()
+            {
+                Command = ViewModel.ShowDetailsCommand,
+                EventName = "ItemSelected"
+            });
+
         }
 
-
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            ListView.Behaviors.Clear();
+        }
     }
 }

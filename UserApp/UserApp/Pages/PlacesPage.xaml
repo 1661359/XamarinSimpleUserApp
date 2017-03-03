@@ -3,21 +3,20 @@
     x:Class="UserApp.Pages.PlacesPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:common="clr-namespace:UserApp.Common;assembly=UserApp"
     xmlns:controls="clr-namespace:IronKit.Controls;assembly=IronKit.RoundedView"
+    xmlns:converters="clr-namespace:UserApp.Common.Converters;assembly=UserApp"
     xmlns:pages="clr-namespace:UserApp.Pages;assembly=UserApp"
     xmlns:userApp="clr-namespace:UserApp;assembly=UserApp"
     Title="{x:Static userApp:AppResources.LocationsTitle}">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <common:CostValueConverter x:Key="CostValueConverter" />
-            <common:DistanceValueConverter x:Key="DistanceValueConverter" />
+            <converters:CostValueConverter x:Key="CostValueConverter" />
+            <converters:DistanceValueConverter x:Key="DistanceValueConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <StackLayout>
         <ListView
             x:Name="ListView"
-            ItemTapped="ListView_OnItemTapped"
             ItemsSource="{Binding Places}"
             RowHeight="100"
             SelectedItem="{Binding SelectedPlace, Mode=TwoWay}">

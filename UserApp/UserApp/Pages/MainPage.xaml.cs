@@ -28,7 +28,7 @@ namespace UserApp.Pages
             var item = e.SelectedItem as MasterPageItem;
             if (item != null)
             {
-                Detail = new NavigationPage((Page)Activator.CreateInstance(item.TargetType));
+                Detail = new NavigationPage((Page)Activator.CreateInstance(item.TargetType));        
                 MenuPage.ListView.SelectedItem = null;
                 IsPresented = false;
             }

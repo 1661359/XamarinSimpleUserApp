@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using PropertyChanged;
 using UserApp.Common;
 using UserApp.Helpers;
@@ -10,6 +11,7 @@ using UserApp.Pages;
 using UserApp.Services;
 using UserApp.Shared.Models;
 using UserApp.Shared.ViewModels;
+using Xamarin.Forms;
 
 namespace UserApp.ViewModel
 {
@@ -21,7 +23,7 @@ namespace UserApp.ViewModel
         public List<PlaceViewModel> Places
         {
             get;
-            set;
+            private set;
         }
 
         public PlaceViewModel SelectedPlace
@@ -30,28 +32,49 @@ namespace UserApp.ViewModel
             set;
         }
 
+        public ICommand ShowDetailsCommand
+        {
+            get;
+            private set;
+        }
+
+        public ICommand CleanSelectedPlaceCommand
+        {
+            get;
+            private set;
+        }
+
         public PlacesPageViewModel(IPlaceService placeService)
         {
             this.placeService = placeService;
+
+            ShowDetailsCommand = new Command(async () => await ShowDetails());
+            CleanSelectedPlaceCommand = new Command(CleanSelectedPlace);
+
             LoadPlaces();
         }
 
-        public void LoadPlaces()
+        private void LoadPlaces()
         {
             var getPlacesTaskCompletion = new NotifyTaskCompletion<IEnumerable<Place>>(placeService.GetPlaces());
-            getPlacesTaskCompletion.OnResultReturned += PlacesReturned;   
+            getPlacesTaskCompletion.OnResultReturned += PlacesReturned;
         }
 
         private void PlacesReturned(object sender, EventArgs e)
         {
-            var taskCompletion = (NotifyTaskCompletion<IEnumerable<Place>>) sender;
+            var taskCompletion = (NotifyTaskCompletion<IEnumerable<Place>>)sender;
             var places = taskCompletion.Result;
             Places = places?.Select(PlaceMapper.MapToPlaceViewModel).ToList();
         }
 
-        public async Task NavigateToDetails()
-        {           
-            await NavigationHelper.GetPagesNavigation().PushAsync(new PlaceDetailsPage(SelectedPlace.Id));
+        private async Task ShowDetails()
+        {
+            if (SelectedPlace != null)
+                await NavigationHelper.GetPagesNavigation().PushAsync(new PlaceDetailsPage(SelectedPlace.Id));
+        }
+
+        private void CleanSelectedPlace()
+        {
             SelectedPlace = null;
         }
     }

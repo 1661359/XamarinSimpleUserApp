@@ -2,7 +2,7 @@
 using System.Globalization;
 using Xamarin.Forms;
 
-namespace UserApp.Common
+namespace UserApp.Common.Converters
 {
     public class TimeValueConverter : IValueConverter
     {

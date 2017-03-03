@@ -3,16 +3,16 @@
     x:Class="UserApp.Pages.PlaceDetailsPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:common="clr-namespace:UserApp.Common;assembly=UserApp"
     xmlns:controls="clr-namespace:IronKit.Controls;assembly=IronKit.RoundedView"
+    xmlns:converters="clr-namespace:UserApp.Common.Converters;assembly=UserApp"
     xmlns:pages="clr-namespace:UserApp.Pages;assembly=UserApp"
     xmlns:userApp="clr-namespace:UserApp;assembly=UserApp"
     Title="{x:Static userApp:AppResources.SearchResultTitle}">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <common:CostValueConverter x:Key="CostValueConverter" />
-            <common:DistanceValueConverter x:Key="DistanceValueConverter" />
-            <common:TimeValueConverter x:Key="TimeValueConverter" />
+            <converters:CostValueConverter x:Key="CostValueConverter" />
+            <converters:DistanceValueConverter x:Key="DistanceValueConverter" />
+            <converters:TimeValueConverter x:Key="TimeValueConverter" />
             <Style x:Key="SeparatorStyle" TargetType="StackLayout">
                 <Setter Property="Margin" Value="10,3" />
                 <Setter Property="BackgroundColor" Value="Silver" />

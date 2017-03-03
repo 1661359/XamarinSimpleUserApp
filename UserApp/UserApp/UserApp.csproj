@@ -44,10 +44,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Common\CostValueConverter.cs" />
-    <Compile Include="Common\DistanceValueConverter.cs" />
+    <Compile Include="Common\Behaviors\BindableBehavior.cs" />
+    <Compile Include="Common\Converters\CostValueConverter.cs" />
+    <Compile Include="Common\Converters\DistanceValueConverter.cs" />
+    <Compile Include="Common\Behaviors\EventToCommandBehavior.cs" />
+    <Compile Include="Common\Converters\SelectedItemConverter.cs" />
     <Compile Include="Common\NotifyTaskCompletion.cs" />
-    <Compile Include="Common\TimeValueConverter.cs" />
+    <Compile Include="Common\Converters\TimeValueConverter.cs" />
     <Compile Include="Helpers\Mappers\PlaceMapper.cs" />
     <Compile Include="Helpers\NavigationHelper.cs" />
     <Compile Include="Helpers\NotifyPropertyChangeHelpers.cs" />
