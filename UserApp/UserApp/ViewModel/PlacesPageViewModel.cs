@@ -26,19 +26,7 @@ namespace UserApp.ViewModel
             private set;
         }
 
-        public PlaceViewModel SelectedPlace
-        {
-            get;
-            set;
-        }
-
         public ICommand ShowDetailsCommand
-        {
-            get;
-            private set;
-        }
-
-        public ICommand CleanSelectedPlaceCommand
         {
             get;
             private set;
@@ -48,8 +36,7 @@ namespace UserApp.ViewModel
         {
             this.placeService = placeService;
 
-            ShowDetailsCommand = new Command(async () => await ShowDetails());
-            CleanSelectedPlaceCommand = new Command(CleanSelectedPlace);
+            ShowDetailsCommand = new Command<PlaceViewModel>(async (p) => await ShowDetails(p));
 
             LoadPlaces();
         }
@@ -67,15 +54,10 @@ namespace UserApp.ViewModel
             Places = places?.Select(PlaceMapper.MapToPlaceViewModel).ToList();
         }
 
-        private async Task ShowDetails()
+        private async Task ShowDetails(PlaceViewModel selectedPlace)
         {
-            if (SelectedPlace != null)
-                await NavigationHelper.GetPagesNavigation().PushAsync(new PlaceDetailsPage(SelectedPlace.Id));
-        }
-
-        private void CleanSelectedPlace()
-        {
-            SelectedPlace = null;
+            if (selectedPlace != null)
+                await NavigationHelper.GetPagesNavigation().PushAsync(new PlaceDetailsPage(selectedPlace.Id));
         }
     }
 }

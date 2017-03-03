@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:IronKit.Controls;assembly=IronKit.RoundedView"
     xmlns:converters="clr-namespace:UserApp.Common.Converters;assembly=UserApp"
+    xmlns:customcontrols="clr-namespace:UserApp.Common.Controls;assembly=UserApp"
     xmlns:pages="clr-namespace:UserApp.Pages;assembly=UserApp"
     xmlns:userApp="clr-namespace:UserApp;assembly=UserApp"
     Title="{x:Static userApp:AppResources.LocationsTitle}">
@@ -15,11 +16,10 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <StackLayout>
-        <ListView
+        <customcontrols:UnselectableListView
             x:Name="ListView"
             ItemsSource="{Binding Places}"
-            RowHeight="100"
-            SelectedItem="{Binding SelectedPlace, Mode=TwoWay}">
+            RowHeight="100">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -79,6 +79,6 @@
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
-        </ListView>
+        </customcontrols:UnselectableListView>
     </StackLayout>
 </pages:PlacesPageBase>

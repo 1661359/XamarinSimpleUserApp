@@ -1,4 +1,5 @@
 ﻿using UserApp.Common.Behaviors;
+using UserApp.Common.Converters;
 using UserApp.ViewModel;
 
 namespace UserApp.Pages
@@ -14,20 +15,19 @@ namespace UserApp.Pages
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            ViewModel.CleanSelectedPlaceCommand.Execute(null);
-
             ListView.Behaviors.Add(new EventToCommandBehavior()
             {
                 Command = ViewModel.ShowDetailsCommand,
-                EventName = "ItemSelected"
+                EventName = "ItemSelected",
+                Converter = new SelectedItemConverter()
             });
-
         }
 
         protected override void OnDisappearing()
         {
-            base.OnDisappearing();
             ListView.Behaviors.Clear();
+
+            base.OnDisappearing();
         }
     }
 }
