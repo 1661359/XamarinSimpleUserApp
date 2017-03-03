@@ -70,7 +70,7 @@
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Services\ApiWrapper\IPlaceApi.cs" />
     <Compile Include="Services\ApiWrapper\IPlaceDetailsApi.cs" />
-    <Compile Include="Services\AppSessionConfig.cs" />
+    <Compile Include="AppSessionConfig.cs" />
     <Compile Include="Pages\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>

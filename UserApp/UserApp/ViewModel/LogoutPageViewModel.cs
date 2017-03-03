@@ -9,7 +9,7 @@ namespace UserApp.ViewModel
     [ImplementPropertyChanged]
     public class LogoutPageViewModel : IViewModel
     {
-        private readonly AppSessionConfig appSessionConfig;
+        private readonly IAuthorizationService authorizationService;
 
         public string UserName
         {
@@ -23,21 +23,22 @@ namespace UserApp.ViewModel
             private set;
         }
 
-        public LogoutPageViewModel(AppSessionConfig appSessionConfig)
+        public LogoutPageViewModel(IAuthorizationService authorizationService)
         {
-            this.appSessionConfig = appSessionConfig;
+            this.authorizationService = authorizationService;
+
             LoadUserNameCommand = new Command(LoadUserName);
         }
 
         private void LoadUserName()
         {
-            UserName = appSessionConfig.UserName;
+            UserName = AppSessionConfig.UserName;
         }
 
         public void DoLogout()
         {
             UserName = string.Empty;
-            appSessionConfig.DoLogout(); 
+            authorizationService.Logout(); 
             Application.Current.ShowLoginPage();
         }
     }

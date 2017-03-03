@@ -19,7 +19,6 @@ namespace UserApp
         {
             RegisterViewModels(builder);
             builder.RegisterInstance<IApiProvider>(new ApiProvider());
-            builder.RegisterInstance(new AppSessionConfig());
             builder.RegisterType<PlaceService>().As<IPlaceService>();
             builder.RegisterType<AuthorizationService>().As<IAuthorizationService>();
         }

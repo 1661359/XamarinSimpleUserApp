@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using UserApp.Services.ApiWrapper;
+using UserApp.Shared.Contracts;
 using UserApp.Shared.ViewModels;
 
 namespace UserApp.Services
@@ -9,12 +10,10 @@ namespace UserApp.Services
     public class AuthorizationService : IAuthorizationService
     {
         private readonly IApiProvider apiProvider;
-        private readonly AppSessionConfig appSessionConfig;
 
-        public AuthorizationService(IApiProvider apiProvider, AppSessionConfig appSessionConfig)
+        public AuthorizationService(IApiProvider apiProvider)
         {
             this.apiProvider = apiProvider;
-            this.appSessionConfig = appSessionConfig;
         }
 
         public async Task Login(string userName)
@@ -24,7 +23,12 @@ namespace UserApp.Services
             {
                 throw new Exception(AppResources.Message_ProblemWithConnection);
             }
-            appSessionConfig.LoadAuthorizationResult(authViewModel);
+            LoadAuthorizationResult(authViewModel);
+        }
+
+        public void Logout()
+        {
+            AppSessionConfig.IsLoggedIn = false;
         }
 
         private async Task<UserAuthorizationViewModel> GetUserAuthorizationViewModel(string userName)
@@ -36,6 +40,20 @@ namespace UserApp.Services
                         ct => apiProvider.UsersApi.Login(new UserAuthorizationViewModel { UserName = userName }, ct),
                         cancelationToken.Token);
             return authViewModel;
+        }
+
+
+        private void LoadAuthorizationResult(UserAuthorizationViewModel model)
+        {
+            if (model == null)
+            {
+                AppSessionConfig.IsLoggedIn = false;
+                return;
+            }
+            AppSessionConfig.LastAuthorizationAnswer = model.AuthorizationAnswer;
+            AppSessionConfig.IsLoggedIn = model.AuthorizationAnswer == AuthorizationAnswer.Ok;
+            AppSessionConfig.UserName = AppSessionConfig.IsLoggedIn ? model.UserName : null;
+            AppSessionConfig.Token = AppSessionConfig.IsLoggedIn ? model.Token : null;
         }
     }
 }

@@ -17,7 +17,7 @@ namespace UserApp.Pages
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            UserNameEntry.Behaviors.Add(new EventToCommandBehavior {EventName = "OnFocused", Command = new Command(ViewModel.HideMessage)});
+            UserNameEntry.Behaviors.Add(new EventToCommandBehavior {EventName = "Focused", Command = new Command(ViewModel.HideMessage)});
         }
 
         protected override void OnDisappearing()
