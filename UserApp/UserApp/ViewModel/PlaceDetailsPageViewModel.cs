@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Linq;
+using System.Windows.Input;
 using PropertyChanged;
 using UserApp.Common;
 using UserApp.Helpers.Mappers;
 using UserApp.Services;
 using UserApp.Shared.Models;
 using UserApp.Shared.ViewModels;
+using Xamarin.Forms;
 
 namespace UserApp.ViewModel
 {
@@ -42,10 +44,18 @@ namespace UserApp.ViewModel
             set;
         }
 
+        public ICommand LoadPlaceDetailsCommand
+        {
+            get;
+            set;
+        }
+
 
         public PlaceDetailsPageViewModel(IPlaceService placeService)
         {
             this.placeService = placeService;
+
+            LoadPlaceDetailsCommand = new Command<Guid>(LoadPlaceDetails);
         }
 
         public void LoadPlaceDetails(Guid id)

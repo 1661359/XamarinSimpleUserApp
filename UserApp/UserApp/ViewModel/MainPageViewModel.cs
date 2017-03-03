@@ -14,8 +14,6 @@ namespace UserApp.ViewModel
 
         public void LoadLoginPageWhenNotLogged()
         {
-            //clear
-            //appSessionConfig.LoadAuthorizationResult(new UserAuthorizationViewModel() {AuthorizationAnswer = AuthorizationAnswer.Ok, UserName = "LOL"});
             if (!AppSessionConfig.IsLoggedIn)
                 Application.Current.ShowLoginPage();
         }
