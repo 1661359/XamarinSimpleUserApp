@@ -130,6 +130,14 @@
       <HintPath>..\..\packages\IronKit.Commanding.1.0.0\lib\portable45-net45+win8+wp8+wpa81\IronKit.Commanding.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="IronKit.ExtendedEntry, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\IronKit.ExtendedEntry.1.0.2\lib\xamarinios\IronKit.ExtendedEntry.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="IronKit.ExtendedEntry.iOS, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\IronKit.ExtendedEntry.1.0.2\lib\xamarinios\IronKit.ExtendedEntry.iOS.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="IronKit.RoundedView, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\IronKit.RoundedView.1.0.3\lib\xamarinios\IronKit.RoundedView.dll</HintPath>
       <Private>True</Private>
@@ -198,6 +206,9 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\wait.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

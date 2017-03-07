@@ -14,10 +14,10 @@ namespace UserApp.Services
         {
             this.apiProvider = apiProvider;
         }
-        public async Task<IEnumerable<Place>> GetPlaces()
+        public async Task<IEnumerable<Place>> GetPlaces(Place queryParameter)
         {
             var cancelationToken = new CancellationTokenSource();
-            return await apiProvider.MakeRequest(ct => apiProvider.PlaceApi.GetAll(ct), cancelationToken.Token);
+            return await apiProvider.MakeRequest(ct => apiProvider.PlaceApi.GetAll(queryParameter, ct), cancelationToken.Token);
         }
 
         public async Task<PlaceDetails> GetPlaceDetails(Guid id)

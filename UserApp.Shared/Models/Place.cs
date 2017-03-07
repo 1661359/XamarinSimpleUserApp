@@ -23,6 +23,12 @@ namespace UserApp.Shared.Models
             set;
         }
 
+        public string ZipCode
+        {
+            get;
+            set;
+        }
+
         public double AverageCost
         {
             get;

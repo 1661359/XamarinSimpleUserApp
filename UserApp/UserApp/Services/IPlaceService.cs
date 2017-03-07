@@ -7,7 +7,7 @@ namespace UserApp.Services
 {
     public interface IPlaceService
     {
-        Task<IEnumerable<Place>> GetPlaces();
+        Task<IEnumerable<Place>> GetPlaces(Place queryParameter = null);
         Task<PlaceDetails> GetPlaceDetails(Guid id);
     }
 }

@@ -8,7 +8,7 @@ namespace UserApp.Services.ApiWrapper
 {
     public interface IPlaceApi
     {
-        [Get("/getall")]
-        Task<IEnumerable<Place>> GetAll(CancellationToken ctx);
+        [Post("/getall")]
+        Task<IEnumerable<Place>> GetAll([Body]Place queryParameter, CancellationToken ctx);
     }
 }

@@ -96,8 +96,12 @@ namespace UserApp.Common.Controls
 
         private void SetNavigationButtonsVisibility(object item)
         {
-            if (ItemsSource == null || ItemsSource.Count < 2) 
+            if (ItemsSource == null || ItemsSource.Count < 2)
+            {
+                navigateRight.IsVisible = false;
+                navigateLeft.IsVisible = false;
                 return;
+            }
 
             navigateRight.IsVisible = item != ItemsSource[ItemsSource.Count - 1];
             navigateLeft.IsVisible = item != ItemsSource[0];
@@ -106,13 +110,6 @@ namespace UserApp.Common.Controls
         private void ItemsSourceChanged()
         {
             carouselView.ItemsSource = ItemsSource;
-
-            if (ItemsSource == null || ItemsSource.Count < 2)
-            {
-                navigateRight.IsVisible = false;
-            }
-
-            navigateLeft.IsVisible = false;
         }
 
         private void ItemTemplateChanged()

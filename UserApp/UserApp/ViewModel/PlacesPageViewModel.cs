@@ -26,10 +26,28 @@ namespace UserApp.ViewModel
             private set;
         }
 
+        public string ZipCodeFilter
+        {
+            get;
+            set;
+        }
+
         public ICommand ShowDetailsCommand
         {
             get;
             private set;
+        }
+
+        public ICommand UpdatePlacesCommand
+        {
+            get;
+            private set;
+        }
+
+        public bool IsWaitPlaces
+        {
+            get;
+            set;
         }
 
         public PlacesPageViewModel(IPlaceService placeService)
@@ -37,18 +55,26 @@ namespace UserApp.ViewModel
             this.placeService = placeService;
 
             ShowDetailsCommand = new Command<PlaceViewModel>(async (p) => await ShowDetails(p));
+            UpdatePlacesCommand = new Command(LoadPlaces);
+
 
             LoadPlaces();
         }
 
         private void LoadPlaces()
         {
-            var getPlacesTaskCompletion = new NotifyTaskCompletion<IEnumerable<Place>>(placeService.GetPlaces());
+            IsWaitPlaces = true;
+            var getPlacesTaskCompletion = new NotifyTaskCompletion<IEnumerable<Place>>(placeService.GetPlaces(
+                new Place
+                {
+                    ZipCode = ZipCodeFilter
+                }));
             getPlacesTaskCompletion.OnResultReturned += PlacesReturned;
         }
 
         private void PlacesReturned(object sender, EventArgs e)
         {
+            IsWaitPlaces = false;
             var taskCompletion = (NotifyTaskCompletion<IEnumerable<Place>>)sender;
             var places = taskCompletion.Result;
             Places = places?.Select(PlaceMapper.MapToPlaceViewModel).ToList();

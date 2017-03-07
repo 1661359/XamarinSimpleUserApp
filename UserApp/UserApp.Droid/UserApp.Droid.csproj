@@ -64,6 +64,14 @@
       <HintPath>..\..\packages\IronKit.Common.1.0.0\lib\portable45-net45+win8+wp8+wpa81\IronKit.Common.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="IronKit.ExtendedEntry, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\IronKit.ExtendedEntry.1.0.2\lib\MonoAndroid\IronKit.ExtendedEntry.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="IronKit.ExtendedEntry.Droid, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\IronKit.ExtendedEntry.1.0.2\lib\MonoAndroid\IronKit.ExtendedEntry.Droid.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="IronKit.RoundedView, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\IronKit.RoundedView.1.0.3\lib\MonoAndroid\IronKit.RoundedView.dll</HintPath>
       <Private>True</Private>
@@ -195,6 +203,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\wait.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

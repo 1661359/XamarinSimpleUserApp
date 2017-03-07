@@ -21,11 +21,18 @@ namespace UserApp.Pages
                 EventName = "ItemSelected",
                 Converter = new SelectedItemConverter()
             });
+            ZipCodeEntry.Behaviors.Add(new EventToCommandBehavior
+            {
+                Command = ViewModel.UpdatePlacesCommand,
+                EventName = "TextChanged"
+            });
         }
+
 
         protected override void OnDisappearing()
         {
             ListView.Behaviors.Clear();
+            ZipCodeEntry.Behaviors.Clear();
 
             base.OnDisappearing();
         }
