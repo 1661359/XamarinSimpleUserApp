@@ -3,9 +3,10 @@
     x:Class="UserApp.Pages.PlaceDetailsPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:controls="clr-namespace:IronKit.Controls;assembly=IronKit.RoundedView"
     xmlns:converters="clr-namespace:UserApp.Common.Converters;assembly=UserApp"
+    xmlns:cv="clr-namespace:UserApp.Common.Controls;assembly=UserApp"
     xmlns:pages="clr-namespace:UserApp.Pages;assembly=UserApp"
+    xmlns:rv="clr-namespace:IronKit.Controls;assembly=IronKit.RoundedView"
     xmlns:userApp="clr-namespace:UserApp;assembly=UserApp"
     Title="{x:Static userApp:AppResources.SearchResultTitle}">
     <ContentPage.Resources>
@@ -57,7 +58,7 @@
                         HorizontalTextAlignment="End"
                         Text="{Binding PlaceDetails.Result.AverageCost, Converter={StaticResource CostValueConverter}}"
                         TextColor="#FF99CC" />
-                    <controls:RoundedView
+                    <rv:RoundedView
                         Padding="3,2"
                         BackgroundColor="#E2DDDD"
                         CornerRadius="20"
@@ -66,7 +67,7 @@
                             Margin="2"
                             Text="{Binding PlaceViewModel.Distance, Converter={StaticResource DistanceValueConverter}}"
                             TextColor="Navy" />
-                    </controls:RoundedView>
+                    </rv:RoundedView>
                 </StackLayout>
             </Grid>
             <StackLayout Style="{StaticResource SeparatorStyle}" />
@@ -161,7 +162,13 @@
                         TextColor="Navy" />
                 </Grid>
             </StackLayout>
-            <Image Source="{Binding PlaceDetails.Result.PicturesUrls[0]}" />
+            <cv:NavigatedCarouselView HeightRequest="200" ItemsSource="{Binding PlaceDetails.Result.PicturesUrls}">
+                <cv:NavigatedCarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <Image Aspect="AspectFill" Source="{Binding}" />
+                    </DataTemplate>
+                </cv:NavigatedCarouselView.ItemTemplate>
+            </cv:NavigatedCarouselView>
             <Label Margin="10" Text="{Binding PlaceDetails.Result.Description}" />
         </StackLayout>
     </ScrollView>
