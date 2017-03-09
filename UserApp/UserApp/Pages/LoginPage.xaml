@@ -3,14 +3,18 @@
     x:Class="UserApp.Pages.LoginPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:b="clr-namespace:UserApp.Common.Behaviors;assembly=UserApp"
     xmlns:c="clr-namespace:IronKit.Commanding;assembly=IronKit.Commanding"
+    xmlns:cm="clr-namespace:IronKit.Commanding;assembly=IronKit.Commanding"
+    xmlns:converters="clr-namespace:UserApp.Common.Converters;assembly=UserApp"
     xmlns:local="clr-namespace:UserApp.Pages;assembly=UserApp"
     xmlns:userApp="clr-namespace:UserApp;assembly=UserApp"
     xmlns:validation="clr-namespace:IronKit.Validation;assembly=IronKit.Validation"
     Title="{x:Static userApp:AppResources.ApplicationName}"
     NavigationPage.HasBackButton="False">
-    <local:LoginPage.Resources>
+    <ContentPage.Resources>
         <ResourceDictionary>
+            <converters:ConverterToNullValue x:Key="ConverterToNullValue" />
             <Style x:Key="ValidatableEntryStyle" TargetType="Entry">
                 <Style.Triggers>
                     <Trigger TargetType="Entry" Property="validation:Validation.ValidationState" Value="Invalid">
@@ -28,7 +32,7 @@
                 </Style.Triggers>
             </Style>
         </ResourceDictionary>
-    </local:LoginPage.Resources>
+    </ContentPage.Resources>
     <StackLayout>
         <Label Text="{x:Static userApp:AppResources.UserNameLabel}" />
         <Entry
@@ -36,7 +40,14 @@
             validation:Validation.ValidateOn="PropertyChange"
             Placeholder="{x:Static userApp:AppResources.UserNamePlaceholder}"
             Style="{StaticResource ValidatableEntryStyle}"
-            Text="{Binding UserName}" />
+            Text="{Binding UserName}">
+            <Entry.Behaviors>
+                <b:EventToCommandBehavior
+                    Command="{cm:Command MethodName=HideMessage}"
+                    Converter="{StaticResource ConverterToNullValue}"
+                    EventName="Focused" />
+            </Entry.Behaviors>
+        </Entry>
         <Button
             x:Name="LoginButton"
             Command="{c:Command MethodName=DoLogin}"

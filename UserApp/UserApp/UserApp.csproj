@@ -47,6 +47,7 @@
     <Compile Include="Common\Behaviors\BindableBehavior.cs" />
     <Compile Include="Common\Controls\NavigatedCarouselView.cs" />
     <Compile Include="Common\Controls\UnselectableListView.cs" />
+    <Compile Include="Common\Converters\ConverterToNullValue.cs" />
     <Compile Include="Common\Converters\CostValueConverter.cs" />
     <Compile Include="Common\Converters\DistanceValueConverter.cs" />
     <Compile Include="Common\Behaviors\EventToCommandBehavior.cs" />

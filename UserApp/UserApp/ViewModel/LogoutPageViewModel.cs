@@ -1,5 +1,4 @@
-﻿using System.Windows.Input;
-using PropertyChanged;
+﻿using PropertyChanged;
 using UserApp.Helpers;
 using UserApp.Services;
 using Xamarin.Forms;
@@ -17,20 +16,12 @@ namespace UserApp.ViewModel
             set;
         }
 
-        public ICommand LoadUserNameCommand
-        {
-            get;
-            private set;
-        }
-
         public LogoutPageViewModel(IAuthorizationService authorizationService)
         {
             this.authorizationService = authorizationService;
-
-            LoadUserNameCommand = new Command(LoadUserName);
         }
 
-        private void LoadUserName()
+        public void LoadUserName()
         {
             UserName = AppSessionConfig.UserName;
         }

@@ -1,6 +1,4 @@
-﻿using UserApp.Common.Behaviors;
-using UserApp.Common.Converters;
-using UserApp.ViewModel;
+﻿using UserApp.ViewModel;
 
 namespace UserApp.Pages
 {
@@ -10,31 +8,6 @@ namespace UserApp.Pages
         public PlacesPage()
         {
             InitializeComponent();
-        }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            ListView.Behaviors.Add(new EventToCommandBehavior()
-            {
-                Command = ViewModel.ShowDetailsCommand,
-                EventName = "ItemSelected",
-                Converter = new SelectedItemConverter()
-            });
-            ZipCodeEntry.Behaviors.Add(new EventToCommandBehavior
-            {
-                Command = ViewModel.UpdatePlacesCommand,
-                EventName = "TextChanged"
-            });
-        }
-
-
-        protected override void OnDisappearing()
-        {
-            ListView.Behaviors.Clear();
-            ZipCodeEntry.Behaviors.Clear();
-
-            base.OnDisappearing();
         }
     }
 }

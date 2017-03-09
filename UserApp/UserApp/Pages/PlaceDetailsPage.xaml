@@ -3,6 +3,8 @@
     x:Class="UserApp.Pages.PlaceDetailsPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:b="clr-namespace:UserApp.Common.Behaviors;assembly=UserApp"
+    xmlns:cm="clr-namespace:IronKit.Commanding;assembly=IronKit.Commanding"
     xmlns:converters="clr-namespace:UserApp.Common.Converters;assembly=UserApp"
     xmlns:cv="clr-namespace:UserApp.Common.Controls;assembly=UserApp"
     xmlns:pages="clr-namespace:UserApp.Pages;assembly=UserApp"
@@ -14,6 +16,7 @@
             <converters:CostValueConverter x:Key="CostValueConverter" />
             <converters:DistanceValueConverter x:Key="DistanceValueConverter" />
             <converters:TimeValueConverter x:Key="TimeValueConverter" />
+            <converters:ConverterToNullValue x:Key="ConverterToNullValue" />
             <Style x:Key="SeparatorStyle" TargetType="StackLayout">
                 <Setter Property="Margin" Value="10,3" />
                 <Setter Property="BackgroundColor" Value="Silver" />
@@ -28,6 +31,12 @@
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
+    <ContentPage.Behaviors>
+        <b:EventToCommandBehavior
+            Command="{cm:Command MethodName=LoadPlaceDetails}"
+            Converter="{StaticResource ConverterToNullValue}"
+            EventName="Appearing" />
+    </ContentPage.Behaviors>
     <ScrollView>
         <StackLayout>
             <Grid Margin="10">

@@ -10,11 +10,5 @@ namespace UserApp.Pages
         {
             InitializeComponent();      
         }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            ViewModel.LoadUserNameCommand.Execute(null);
-        }
     }
 }

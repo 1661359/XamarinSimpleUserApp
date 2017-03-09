@@ -1,7 +1,4 @@
-﻿using IronKit.Commanding;
-using UserApp.Common.Behaviors;
-using UserApp.ViewModel;
-using Xamarin.Forms;
+﻿using UserApp.ViewModel;
 
 namespace UserApp.Pages
 {
@@ -11,19 +8,6 @@ namespace UserApp.Pages
         public LoginPage()
         {
             InitializeComponent();
-
-        }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            UserNameEntry.Behaviors.Add(new EventToCommandBehavior {EventName = "Focused", Command = new Command(ViewModel.HideMessage)});
-        }
-
-        protected override void OnDisappearing()
-        {
-            UserNameEntry.Behaviors.Clear();
-            base.OnDisappearing();
         }
     }
 }

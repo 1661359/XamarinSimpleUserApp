@@ -13,7 +13,7 @@ namespace UserApp.Pages
 
         public PlaceDetailsPage(Guid id) : this()
         {
-            ViewModel.LoadPlaceDetailsCommand.Execute(id);
+            ViewModel.PlaceId = id;
         }
     }
 }

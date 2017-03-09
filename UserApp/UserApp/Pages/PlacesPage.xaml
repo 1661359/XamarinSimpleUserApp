@@ -3,6 +3,8 @@
     x:Class="UserApp.Pages.PlacesPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:b="clr-namespace:UserApp.Common.Behaviors;assembly=UserApp"
+    xmlns:cm="clr-namespace:IronKit.Commanding;assembly=IronKit.Commanding"
     xmlns:converters="clr-namespace:UserApp.Common.Converters;assembly=UserApp"
     xmlns:customcontrols="clr-namespace:UserApp.Common.Controls;assembly=UserApp"
     xmlns:ee="clr-namespace:IronKit.Controls;assembly=IronKit.ExtendedEntry"
@@ -14,6 +16,8 @@
         <ResourceDictionary>
             <converters:CostValueConverter x:Key="CostValueConverter" />
             <converters:DistanceValueConverter x:Key="DistanceValueConverter" />
+            <converters:SelectedItemConverter x:Key="SelectedItemConverter" />
+            <converters:ConverterToNullValue x:Key="ConverterToNullValue" />
             <Color x:Key="RoundedElementsColor">#E2DDDD</Color>
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -38,7 +42,14 @@
                     x:Name="ZipCodeEntry"
                     BackgroundColor="{StaticResource RoundedElementsColor}"
                     Placeholder="Please enter ZIP-Code"
-                    Text="{Binding ZipCodeFilter}" />
+                    Text="{Binding ZipCodeFilter}">
+                    <ee:ExtendedEntry.Behaviors>
+                        <b:EventToCommandBehavior
+                            Command="{cm:Command MethodName=LoadPlaces}"
+                            Converter="{StaticResource ConverterToNullValue}"
+                            EventName="TextChanged" />
+                    </ee:ExtendedEntry.Behaviors>
+                </ee:ExtendedEntry>
             </rv:RoundedView>
             <Image
                 Grid.Row="0"
@@ -58,6 +69,12 @@
             x:Name="ListView"
             ItemsSource="{Binding Places}"
             RowHeight="100">
+            <customcontrols:UnselectableListView.Behaviors>
+                <b:EventToCommandBehavior
+                    Command="{cm:Command MethodName=ShowDetails}"
+                    Converter="{StaticResource SelectedItemConverter}"
+                    EventName="ItemSelected" />
+            </customcontrols:UnselectableListView.Behaviors>
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

@@ -3,11 +3,24 @@
     x:Class="UserApp.Pages.LogoutPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:c="clr-namespace:IronKit.Commanding;assembly=IronKit.Commanding"
+    xmlns:b="clr-namespace:UserApp.Common.Behaviors;assembly=UserApp"
+    xmlns:cm="clr-namespace:IronKit.Commanding;assembly=IronKit.Commanding"
+    xmlns:converters="clr-namespace:UserApp.Common.Converters;assembly=UserApp"
     xmlns:local="clr-namespace:UserApp.Pages;assembly=UserApp"
     xmlns:userApp="clr-namespace:UserApp;assembly=UserApp"
     Title="{x:Static userApp:AppResources.ApplicationName}"
     NavigationPage.HasBackButton="False">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:ConverterToNullValue x:Key="ConverterToNullValue" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Behaviors>
+        <b:EventToCommandBehavior
+            Command="{cm:Command MethodName=LoadUserName}"
+            Converter="{StaticResource ConverterToNullValue}"
+            EventName="Appearing" />
+    </ContentPage.Behaviors>
     <StackLayout>
         <Label
             HorizontalOptions="Center"
@@ -17,6 +30,6 @@
             HorizontalOptions="Center"
             Text="{Binding UserName}"
             VerticalOptions="Center" />
-        <Button Command="{c:Command MethodName=DoLogout}" Text="{x:Static userApp:AppResources.LogoutButtonCaption}" />
+        <Button Command="{cm:Command MethodName=DoLogout}" Text="{x:Static userApp:AppResources.LogoutButtonCaption}" />
     </StackLayout>
 </local:LogoutPageBase>
