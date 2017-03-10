@@ -61,6 +61,7 @@ namespace UserApp.ViewModel
 
         private void PlaceDetails_OnResultReturned(object sender, EventArgs e)
         {
+            PlaceDetails.OnResultReturned -= PlaceDetails_OnResultReturned;
             PlaceViewModel = PlaceMapper.MapToPlaceViewModel(PlaceDetails.Result);
             WeekdaysTime = PlaceDetails.Result.WorkDays?.FirstOrDefault(x => x.DayOfWeek != DayOfWeek.Saturday || x.DayOfWeek != DayOfWeek.Sunday);
             SaturdayTime = PlaceDetails.Result.WorkDays?.FirstOrDefault(x => x.DayOfWeek == DayOfWeek.Saturday);

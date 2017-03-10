@@ -19,10 +19,10 @@ namespace UserApp.Api.Controllers
                 Id = id,
                 Name = "Where can I get some",
                 PhoneNumber = "(283) 843-9772",
-                PicturesUrls = new List<string>
+                PicturesUrls = new List<PictureSource>
                 {
-                    "http://netdna.webdesignerdepot.com/uploads/2013/12/featured5.jpg",
-                    "http://cdn.spectator.co.uk/content/uploads/2015/10/HiRes1.jpg"
+                    new PictureSource() {Url =  "http://netdna.webdesignerdepot.com/uploads/2013/12/featured5.jpg"},
+                    new PictureSource() {Url =  "http://cdn.spectator.co.uk/content/uploads/2015/10/HiRes1.jpg"}
                 },
                 Text =
                     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna",

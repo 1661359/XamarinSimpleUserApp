@@ -174,7 +174,7 @@
             <cv:NavigatedCarouselView HeightRequest="200" ItemsSource="{Binding PlaceDetails.Result.PicturesUrls}">
                 <cv:NavigatedCarouselView.ItemTemplate>
                     <DataTemplate>
-                        <Image Aspect="AspectFill" Source="{Binding}" />
+                        <Image Aspect="AspectFill" Source="{Binding Url}" />
                     </DataTemplate>
                 </cv:NavigatedCarouselView.ItemTemplate>
             </cv:NavigatedCarouselView>

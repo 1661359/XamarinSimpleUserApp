@@ -36,11 +36,16 @@ namespace UserApp.ViewModel
             set;
         }
 
+        public bool IsSelectPlaceEnabled
+        {
+            get;
+            set;
+        }
+
         public PlacesPageViewModel(IPlaceService placeService)
         {
             this.placeService = placeService;
-
-            LoadPlaces();
+            IsSelectPlaceEnabled = true;           
         }
 
         public void LoadPlaces()
@@ -64,8 +69,10 @@ namespace UserApp.ViewModel
 
         public async Task ShowDetails(PlaceViewModel selectedPlace)
         {
+            IsSelectPlaceEnabled = false;
             if (selectedPlace != null)
                 await NavigationHelper.GetPagesNavigation().PushAsync(new PlaceDetailsPage(selectedPlace.Id));
+            IsSelectPlaceEnabled = true;
         }
     }
 }

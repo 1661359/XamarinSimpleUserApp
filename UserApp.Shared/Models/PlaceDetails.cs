@@ -22,7 +22,7 @@ namespace UserApp.Shared.Models
             set;
         }
 
-        public IEnumerable<string> PicturesUrls
+        public IEnumerable<PictureSource> PicturesUrls
         {
             get;
             set;

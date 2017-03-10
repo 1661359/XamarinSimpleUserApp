@@ -90,6 +90,7 @@ namespace UserApp.Common.Behaviors
 
         void OnEvent(object sender, object eventArgs)
         {
+            BindingContext = AssociatedObject.BindingContext;
             if (Command == null)
             {
                 return;

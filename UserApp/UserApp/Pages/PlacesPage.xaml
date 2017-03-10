@@ -21,19 +21,26 @@
             <Color x:Key="RoundedElementsColor">#E2DDDD</Color>
         </ResourceDictionary>
     </ContentPage.Resources>
+    <ContentPage.Behaviors>
+        <b:EventToCommandBehavior
+            Command="{cm:Command MethodName=LoadPlaces}"
+            Converter="{StaticResource ConverterToNullValue}"
+            EventName="Appearing" />
+    </ContentPage.Behaviors>
     <StackLayout>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="5*" />
+                <ColumnDefinition Width="4*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <rv:RoundedView
                 Grid.Row="0"
                 Grid.Column="1"
+                Margin="2"
                 Padding="20,0"
                 BackgroundColor="{StaticResource RoundedElementsColor}"
                 CornerRadius="40"
@@ -67,6 +74,7 @@
         </Grid>
         <customcontrols:UnselectableListView
             x:Name="ListView"
+            IsEnabled="{Binding IsSelectPlaceEnabled}"
             ItemsSource="{Binding Places}"
             RowHeight="100">
             <customcontrols:UnselectableListView.Behaviors>
