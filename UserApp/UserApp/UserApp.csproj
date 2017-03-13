@@ -89,7 +89,9 @@
     <Compile Include="AppSetup.cs" />
     <Compile Include="Helpers\PageLoader.cs" />
     <Compile Include="Services\AuthorizationService.cs" />
+    <Compile Include="Services\GeoService.cs" />
     <Compile Include="Services\IAuthorizationService.cs" />
+    <Compile Include="Services\IGeoService.cs" />
     <Compile Include="Services\IPlaceService.cs" />
     <Compile Include="Services\PlaceService.cs" />
     <Compile Include="ViewModel\IViewModel.cs" />

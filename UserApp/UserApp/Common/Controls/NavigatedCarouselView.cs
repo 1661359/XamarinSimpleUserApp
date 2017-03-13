@@ -82,11 +82,11 @@ namespace UserApp.Common.Controls
 
             HorizontalOptions = LayoutOptions.FillAndExpand;
 
+            carouselView.ItemSelected += CarouselView_ItemSelected;
+
             Children.Add(carouselView);
             Children.Add(navigateLeft);
             Children.Add(navigateRight);
-
-            carouselView.ItemSelected += CarouselView_ItemSelected;
         }
 
         private void CarouselView_ItemSelected(object sender, SelectedItemChangedEventArgs e)

@@ -2,10 +2,8 @@
 using System.Linq;
 using PropertyChanged;
 using UserApp.Common;
-using UserApp.Helpers.Mappers;
 using UserApp.Services;
 using UserApp.Shared.Models;
-using UserApp.Shared.ViewModels;
 
 namespace UserApp.ViewModel
 {
@@ -13,13 +11,14 @@ namespace UserApp.ViewModel
     public class PlaceDetailsPageViewModel : IViewModel
     {
         private readonly IPlaceService placeService;
+        private readonly IGeoService geoService;
         public NotifyTaskCompletion<PlaceDetails> PlaceDetails
         {
             get;
             set;
         }
 
-        public PlaceViewModel PlaceViewModel
+        public double Distance
         {
             get;
             set;
@@ -48,9 +47,10 @@ namespace UserApp.ViewModel
             set;
         }
 
-        public PlaceDetailsPageViewModel(IPlaceService placeService)
+        public PlaceDetailsPageViewModel(IPlaceService placeService, IGeoService geoService)
         {
             this.placeService = placeService;
+            this.geoService = geoService;
         }
 
         public void LoadPlaceDetails()
@@ -62,7 +62,7 @@ namespace UserApp.ViewModel
         private void PlaceDetails_OnResultReturned(object sender, EventArgs e)
         {
             PlaceDetails.OnResultReturned -= PlaceDetails_OnResultReturned;
-            PlaceViewModel = PlaceMapper.MapToPlaceViewModel(PlaceDetails.Result);
+            Distance = geoService.GetDistanceTo(PlaceDetails.Result.Address);
             WeekdaysTime = PlaceDetails.Result.WorkDays?.FirstOrDefault(x => x.DayOfWeek != DayOfWeek.Saturday || x.DayOfWeek != DayOfWeek.Sunday);
             SaturdayTime = PlaceDetails.Result.WorkDays?.FirstOrDefault(x => x.DayOfWeek == DayOfWeek.Saturday);
             SundayTime = PlaceDetails.Result.WorkDays?.FirstOrDefault(x => x.DayOfWeek == DayOfWeek.Sunday);

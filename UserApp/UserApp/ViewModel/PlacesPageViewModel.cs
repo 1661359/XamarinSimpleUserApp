@@ -17,6 +17,8 @@ namespace UserApp.ViewModel
     public class PlacesPageViewModel : IViewModel
     {
         private readonly IPlaceService placeService;
+        private readonly IGeoService geoService;
+        private NotifyTaskCompletion<IEnumerable<Place>> getPlacesTaskCompletion;
 
         public List<PlaceViewModel> Places
         {
@@ -42,16 +44,17 @@ namespace UserApp.ViewModel
             set;
         }
 
-        public PlacesPageViewModel(IPlaceService placeService)
+        public PlacesPageViewModel(IPlaceService placeService, IGeoService geoService)
         {
             this.placeService = placeService;
+            this.geoService = geoService;
             IsSelectPlaceEnabled = true;           
         }
 
         public void LoadPlaces()
         {
             IsWaitPlaces = true;
-            var getPlacesTaskCompletion = new NotifyTaskCompletion<IEnumerable<Place>>(placeService.GetPlaces(
+            getPlacesTaskCompletion = new NotifyTaskCompletion<IEnumerable<Place>>(placeService.GetPlaces(
                 new Place
                 {
                     ZipCode = ZipCodeFilter
@@ -61,10 +64,18 @@ namespace UserApp.ViewModel
 
         private void PlacesReturned(object sender, EventArgs e)
         {
+            getPlacesTaskCompletion.OnResultReturned -= PlacesReturned;
             IsWaitPlaces = false;
             var taskCompletion = (NotifyTaskCompletion<IEnumerable<Place>>)sender;
             var places = taskCompletion.Result;
-            Places = places?.Select(PlaceMapper.MapToPlaceViewModel).ToList();
+            Places = places?.Select(GetPlaceViewModel).ToList();
+        }
+
+        private PlaceViewModel GetPlaceViewModel(Place place)
+        {
+            var viewModel = PlaceMapper.MapToPlaceViewModel(place);
+            viewModel.Distance = geoService.GetDistanceTo(place.Address);
+            return viewModel;
         }
 
         public async Task ShowDetails(PlaceViewModel selectedPlace)

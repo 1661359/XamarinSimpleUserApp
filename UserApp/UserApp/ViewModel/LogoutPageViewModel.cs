@@ -28,7 +28,6 @@ namespace UserApp.ViewModel
 
         public void DoLogout()
         {
-            UserName = string.Empty;
             authorizationService.Logout(); 
             Application.Current.ShowLoginPage();
         }

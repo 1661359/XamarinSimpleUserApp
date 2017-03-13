@@ -21,6 +21,7 @@ namespace UserApp
             builder.RegisterInstance<IApiProvider>(new ApiProvider());
             builder.RegisterType<PlaceService>().As<IPlaceService>();
             builder.RegisterType<AuthorizationService>().As<IAuthorizationService>();
+            builder.RegisterType<GeoService>().As<IGeoService>();
         }
 
         private static void RegisterViewModels(ContainerBuilder builder)

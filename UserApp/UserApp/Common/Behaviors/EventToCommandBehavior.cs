@@ -60,7 +60,7 @@ namespace UserApp.Common.Behaviors
             EventInfo eventInfo = AssociatedObject.GetType().GetRuntimeEvent(name);
             if (eventInfo == null)
             {
-                throw new ArgumentException(string.Format("EventToCommandBehavior: Can't register the '{0}' event.", EventName));
+                throw new ArgumentException($"EventToCommandBehavior: Can't register the '{EventName}' event.");
             }
             MethodInfo methodInfo = typeof(EventToCommandBehavior).GetTypeInfo().GetDeclaredMethod("OnEvent");
 

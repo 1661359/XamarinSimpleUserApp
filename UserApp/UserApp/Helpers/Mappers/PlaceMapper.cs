@@ -16,13 +16,18 @@ namespace UserApp.Helpers.Mappers
         public static PlaceViewModel MapToPlaceViewModel(Place place)
         {
             var result = Mapper.Map<PlaceViewModel>(place);
+            MapWorkingTime(place, result);
+            return result;
+        }
+
+
+        private static void MapWorkingTime(Place place, PlaceViewModel result)
+        {
             var currentDay = DateTime.Now.DayOfWeek;
             var workingTime = place.WorkDays?.FirstOrDefault(m => m.DayOfWeek == currentDay);
             result.WorkingTimeToday = workingTime == null
                 ? "Not working today"
                 : $"{workingTime.StartTime} - {workingTime.EndTime}";
-            result.Distance = (new Random()).Next(10)/100.0;
-            return result;
         }
     }
 }

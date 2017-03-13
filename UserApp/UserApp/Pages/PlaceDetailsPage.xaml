@@ -76,7 +76,7 @@
                         HorizontalOptions="Center">
                         <Label
                             Margin="2"
-                            Text="{Binding PlaceViewModel.Distance, Converter={StaticResource DistanceValueConverter}}"
+                            Text="{Binding Distance, Converter={StaticResource DistanceValueConverter}}"
                             TextColor="Navy" />
                     </rv:RoundedView>
                 </StackLayout>
