@@ -5,9 +5,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:b="clr-namespace:UserApp.Common.Behaviors;assembly=UserApp"
     xmlns:cm="clr-namespace:IronKit.Commanding;assembly=IronKit.Commanding"
+    xmlns:controls="clr-namespace:UserApp.Common.Controls;assembly=UserApp"
     xmlns:converters="clr-namespace:UserApp.Common.Converters;assembly=UserApp"
-    xmlns:customcontrols="clr-namespace:UserApp.Common.Controls;assembly=UserApp"
     xmlns:ee="clr-namespace:IronKit.Controls;assembly=IronKit.ExtendedEntry"
+    xmlns:effects="clr-namespace:UserApp.Common.Effects;assembly=UserApp"
     xmlns:pages="clr-namespace:UserApp.Pages;assembly=UserApp"
     xmlns:rv="clr-namespace:IronKit.Controls;assembly=IronKit.RoundedView"
     xmlns:userApp="clr-namespace:UserApp;assembly=UserApp"
@@ -72,17 +73,17 @@
                 </Image.Source>
             </Image>
         </Grid>
-        <customcontrols:UnselectableListView
+        <controls:UnselectableListView
             x:Name="ListView"
             IsEnabled="{Binding IsSelectPlaceEnabled}"
             ItemsSource="{Binding Places}"
             RowHeight="100">
-            <customcontrols:UnselectableListView.Behaviors>
+            <controls:UnselectableListView.Behaviors>
                 <b:EventToCommandBehavior
                     Command="{cm:Command MethodName=ShowDetails}"
                     Converter="{StaticResource SelectedItemConverter}"
                     EventName="ItemSelected" />
-            </customcontrols:UnselectableListView.Behaviors>
+            </controls:UnselectableListView.Behaviors>
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -99,10 +100,12 @@
                                 Grid.Row="0"
                                 Grid.Column="0"
                                 VerticalOptions="Center">
-                                <Label
-                                    FontAttributes="Bold"
-                                    FontSize="Large"
-                                    Text="{Binding Name}" />
+                                <Label Text="{Binding Name}">
+                                    <Label.Effects>
+                                        <effects:ItemsTitleEffect />
+                                    </Label.Effects>
+                                </Label>
+
                                 <Label Text="{Binding Address}" />
                                 <Label Text="{Binding WorkingTimeToday}" TextColor="Navy" />
                             </StackLayout>
@@ -142,6 +145,6 @@
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
-        </customcontrols:UnselectableListView>
+        </controls:UnselectableListView>
     </StackLayout>
 </pages:PlacesPageBase>

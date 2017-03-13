@@ -7,6 +7,7 @@
     xmlns:cm="clr-namespace:IronKit.Commanding;assembly=IronKit.Commanding"
     xmlns:converters="clr-namespace:UserApp.Common.Converters;assembly=UserApp"
     xmlns:cv="clr-namespace:UserApp.Common.Controls;assembly=UserApp"
+    xmlns:effects="clr-namespace:UserApp.Common.Effects;assembly=UserApp"
     xmlns:pages="clr-namespace:UserApp.Pages;assembly=UserApp"
     xmlns:rv="clr-namespace:IronKit.Controls;assembly=IronKit.RoundedView"
     xmlns:userApp="clr-namespace:UserApp;assembly=UserApp"
@@ -51,10 +52,11 @@
                     Grid.Row="0"
                     Grid.Column="0"
                     VerticalOptions="Center">
-                    <Label
-                        FontAttributes="Bold"
-                        FontSize="Large"
-                        Text="{Binding PlaceDetails.Result.Name}" />
+                    <Label Text="{Binding PlaceDetails.Result.Name}">
+                        <Label.Effects>
+                            <effects:ItemsTitleEffect />
+                        </Label.Effects>
+                    </Label>
                     <Label Text="{Binding PlaceDetails.Result.Address}" />
                 </StackLayout>
                 <StackLayout
