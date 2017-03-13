@@ -1,7 +1,12 @@
 ﻿using System;
 using UIKit;
+using UserApp.iOS.Effects;
+using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
+
+[assembly: ResolutionGroupName("UserApp")]
+[assembly: ExportEffect(typeof(ItemsTitleEffect), "ItemsTitleEffect")]
 namespace UserApp.iOS.Effects
 {
     public class ItemsTitleEffect : PlatformEffect

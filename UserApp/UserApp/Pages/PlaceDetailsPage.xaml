@@ -91,7 +91,11 @@
                 <Label
                     FontSize="Large"
                     Text="{Binding PlaceDetails.Result.PhoneNumber}"
-                    TextColor="Navy" />
+                    TextColor="Navy">
+                    <Label.Effects>
+                        <effects:FlashingEffect Color="Crimson" />
+                    </Label.Effects>
+                </Label>
             </StackLayout>
             <StackLayout Style="{StaticResource SeparatorStyle}" />
             <Label Margin="10" Text="{Binding PlaceDetails.Result.Text}" />

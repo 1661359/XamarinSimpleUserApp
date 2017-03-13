@@ -52,6 +52,7 @@
     <Compile Include="Common\Converters\DistanceValueConverter.cs" />
     <Compile Include="Common\Behaviors\EventToCommandBehavior.cs" />
     <Compile Include="Common\Converters\SelectedItemConverter.cs" />
+    <Compile Include="Common\Effects\FlashingEffect.cs" />
     <Compile Include="Common\Effects\ItemsTitleEffect.cs" />
     <Compile Include="Common\NotifyTaskCompletion.cs" />
     <Compile Include="Common\Converters\TimeValueConverter.cs" />
